@@ -1,0 +1,96 @@
+<% content_for(:title, @room.name) %>
+<div  data-video-token-value="<%= @room.jwt %>" 
+      data-video-url-value="<%= @whepURL %>" 
+      data-video-room-id-value="<%= @room.hashid %>"
+      data-controller="video" 
+      class="grid grid-cols-1 lg:grid-cols-3 gap-8"
+>
+  <div class="lg:col-span-2 space-y-6">
+    <% if notice.present? %>
+      <div role="alert" class="alert alert-success shadow-sm mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span><%= notice %></span>
+      </div>
+    <% end %>
+    <%= render partial: "video", room: @room%>
+    <div class="space-y-4">
+      <h1 class=" text-2xl flex items-center md:text-3xl font-bold leading-tight"><%= @room.name %>
+        <span data-video-target="badge" class="text-xs uppercase py-4 badge badge-neutral ml-auto font-semibold px-3 py-3">
+          <span class="w-2 h-2 rounded-full bg-white animate-ping"></span><span data-video-target="badgeText">Chưa phát</span>
+        </span>
+      </h1>
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-base-100 pb-6">
+        <div class="flex items-center gap-4">
+          <div class="avatar">
+            <div class="w-12 h-12 rounded-full ring ring-primary ring-offset-2">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop" />
+            </div>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg"><%= @room.owner %>
+              <div class="badge badge-primary badge-xs">✓</div>
+            </h3>
+            <p class="text-sm text-gray-400">1.2M người đăng ký</p>
+          </div>
+          <button class="btn btn-primary btn-md rounded-full px-6 ml-4">Đăng Ký</button>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="join">
+            <button class="btn rounded-l-full join-item btn-neutral btn-md gap-2"> 😍 45k</button>
+            <button class="btn rounded-r-full join-item btn-neutral btn-md border-l">😡</button>
+          </div>
+          <button class="btn btn-neutral btn-md rounded-full gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+            Chia sẻ
+          </button>
+          <%= button_to toggle_stream_path(@room), method: :delete, class: "btn rounded-full btn-neutral hidden sm:flex", id: "toggle_stream_#{@room.hashid}_1" do %>
+            <% if @room.blocked %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+              </svg>
+              <%= t("actions.stream.open") %>
+            <% else %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+              </svg>
+              <%= t("actions.stream.kick") %>
+            <% end %>
+          <% end %>
+        </div>
+        <%= button_to toggle_stream_path(@room), method: :delete, class: "btn rounded-full btn-neutral sm:hidden", id: "toggle_stream_#{@room.hashid}_2" do %>
+          <% if @room.blocked %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+            <%= t("actions.stream.open") %>
+          <% else %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+            <%= t("actions.stream.kick") %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="bg-base-200 rounded-xl p-4 text-sm leading-relaxed">
+      <div class="font-bold mb-1">1.5M lượt xem • 2 giờ trước</div>
+      <p>Chào mừng các bạn đến với kênh phát sóng trực tiếp <%= @room.name %></p>
+      <div class="collapse rounded-none collapse-arrow mt-2">
+        <input type="checkbox" />
+        <div class="collapse-title p-0 min-h-0 font-semibold text-primary">Xem thêm</div>
+        <div class="collapse-content p-0 mt-2 grid gap-y-4">
+          <p class="text-justify"><%= @room.description %></p>
+          <div class="divider">Thông số</div>
+          <p class="font-bold">Sử dụng các phần mềm phát sóng hỗ trợ giao thức WHIP (OBS, GStreamer, FFmpeg) để phát video</p>
+          <p class="font-bold">WHIP URL: <a data-video-target="whipUrl" class="link text-info"></a></p>
+          <p class="text-wrap w-full font-bold">Token: 
+            <button data-video-copied-param="<%= t("actions.copied") %>" data-action="click->video#copyTokenToClipboard" class="btn btn-soft btn-accent-content ml-1 btn-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+              </svg>
+              <span data-video-target="tokenCopied"><%= t("actions.copy") %></span>
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>

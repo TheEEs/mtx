@@ -1,0 +1,10 @@
+<% content_for :title, t("actions.new", model: Room.model_name.human) %>
+<div class="max-w-4xl flex mx-auto">
+  <div class="bg-base-100 w-full rounded-2xl shadow-xl p-6 md:p-10 border border-base-300">
+    <h1 class="font-bold text-3xl mb-8 border-b border-base-200 pb-4"><%= t("actions.new", model: Room.model_name.human) %></h1>
+    <%= render "form", room: @room %>
+    <div class="mt-8 flex gap-2 border-t border-base-200 pt-6">
+      <%= link_to t("actions.back"), rooms_path, class: "btn btn-ghost btn-sm" %>
+    </div>
+  </div>
+</div>

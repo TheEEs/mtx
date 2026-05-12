@@ -1,0 +1,53 @@
+<%= form_with(model: room, class: "space-y-6") do |form| %>
+  <% if room.errors.any? %>
+    <div role="alert" class="alert alert-error shadow-sm mb-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <div>
+        <h3 class="font-bold"><%= t "activerecord.errors.template.header.other", model: Room.model_name.human, count: room.errors.count %></h3>
+        <ul class="list-disc list-inside text-sm mt-1">
+          <% room.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="form-control w-full">
+      <%= form.label :name, class: "label" do %>
+        <span class="label-text font-semibold"><%= Room.human_attribute_name(:name) %></span>
+      <% end %>
+      <%= form.text_field :name, class: "input input-bordered w-full #{'input-error' if room.errors[:name].any?}" %>
+    </div>
+    <div class="form-control w-full">
+      <%= form.label :owner, class: "label" do %>
+        <span class="label-text font-semibold"><%= Room.human_attribute_name(:owner) %></span>
+      <% end %>
+      <%= form.text_field :owner, class: "input input-bordered w-full #{'input-error' if room.errors[:owner].any?}" %>
+    </div>
+  </div>
+  <div class="form-control w-full">
+    <%= form.label :description, class: "label" do %>
+      <span class="label-text font-semibold"><%= Room.human_attribute_name(:description) %></span>
+    <% end %>
+    <%= form.textarea :description, rows: 4, class: "textarea textarea-bordered w-full #{'textarea-error' if room.errors[:description].any?}" %>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="form-control w-full">
+      <%= form.label :valid_from, class: "label" do %>
+        <span class="label-text font-semibold"><%= Room.human_attribute_name(:valid_from) %></span>
+      <% end %>
+      <%= form.datetime_field :valid_from, class: "input input-bordered w-full #{'input-error' if room.errors[:valid_from].any?}" %>
+    </div>
+    <div class="form-control w-full">
+      <%= form.label :valid_to, class: "label" do %>
+        <span class="label-text font-semibold"><%= Room.human_attribute_name(:valid_to) %></span>
+      <% end %>
+      <%= form.datetime_field :valid_to, class: "input input-bordered w-full #{'input-error' if room.errors[:valid_to].any?}" %>
+    </div>
+  </div>
+  <%= form.hidden_field :timezone, data: {controller: "timezone"} %>
+  <div class="pt-4">
+    <%= form.submit class: "btn btn-primary w-full md:w-auto px-10 rounded-lg" %>
+  </div>
+<% end %>

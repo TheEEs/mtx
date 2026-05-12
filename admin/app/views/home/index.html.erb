@@ -1,0 +1,133 @@
+<% content_for(:title, "MTX - Nền tảng phát sóng trực tuyến") %>
+<div class="hero min-h-[70vh]" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop');">
+  <div class="hero-overlay bg-gradient-to-r from-base-300 via-base-300/80 to-transparent"></div>
+  <div class="hero-content text-left w-full justify-start px-4 md:px-12">
+    <div class="max-w-2xl">
+      <span class="badge badge-success gap-2 font-semibold mb-4 px-3 py-3">
+        <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+        ĐANG PHÁT SÓNG
+      </span>
+      <h1 class="cursor-default mb-5 text-4xl md:text-6xl font-bold leading-tight">Nền tảng phát sóng trực tuyến</h1>
+      <p class="cursor-default mb-8 text-gray-300 text-lg">Mã nguồn mở. Tốc độ cao. Tùy biến thỏa thích.</p>
+      <div class="flex gap-4">
+        <%= link_to "Xem Ngay", rooms_path, class: "btn btn-primary rounded-full px-8" %>
+        <button class="btn btn-outline btn-neutral text-white rounded-full px-8 glass">Lịch Phát Sóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex justify-between items-end mb-8">
+  <div>
+    <h2 class="text-2xl md:text-3xl font-bold mb-2">Thịnh Hành Nhất</h2>
+    <p class="text-gray-400">Các kênh đang có lượng người xem cao nhất hiện tại.</p>
+  </div>
+  <a href="#" class="btn btn-ghost btn-sm text-primary">Xem tất cả ></a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+  <div class="card bg-base-100 shadow-xl group cursor-pointer hover:-translate-y-1 transition-transform duration-300">
+    <figure class="relative">
+      <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop" alt="Stream thumbnail" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="absolute top-2 left-2 badge badge-success text-xs font-bold">TRỰC TIẾP</div>
+      <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-semibold">24.5k người xem</div>
+    </figure>
+    <div class="card-body p-4">
+      <div class="flex gap-3">
+        <div class="avatar">
+          <div class="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop" />
+          </div>
+        </div>
+        <div>
+          <h2 class="card-title text-base line-clamp-1 group-hover:text-primary transition-colors">Hành trình leo Top 1 Thách Đấu</h2>
+          <p class="text-sm text-gray-400">NightOwl_Gamer</p>
+          <div class="flex gap-2 mt-2">
+            <div class="badge badge-outline text-xs">eSports</div>
+            <div class="badge badge-outline text-xs">Hành động</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card bg-base-100 shadow-xl group cursor-pointer hover:-translate-y-1 transition-transform duration-300">
+    <figure class="relative">
+      <img src="https://images.unsplash.com/photo-1594394489098-74ac04c0fc2e?q=80&w=1170&auto=format&fit=crop" alt="Stream thumbnail" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="absolute top-2 left-2 badge badge-success text-xs font-bold">TRỰC TIẾP</div>
+      <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-semibold">12.1k người xem</div>
+    </figure>
+    <div class="card-body p-4">
+      <div class="flex gap-3">
+        <div class="avatar">
+          <div class="w-10 h-10 rounded-full">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop" />
+          </div>
+        </div>
+        <div>
+          <h2 class="card-title text-base line-clamp-1 group-hover:text-primary transition-colors">Thiết kế UI/UX Landing Page</h2>
+          <p class="text-sm text-gray-400">CreativeCoder</p>
+          <div class="flex gap-2 mt-2">
+            <div class="badge badge-outline text-xs">Sáng tạo</div>
+            <div class="badge badge-outline text-xs">Design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card bg-base-100 shadow-xl group cursor-pointer hover:-translate-y-1 transition-transform duration-300">
+    <figure class="relative">
+      <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop" alt="Stream thumbnail" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="absolute top-2 left-2 badge badge-success text-xs font-bold">TRỰC TIẾP</div>
+      <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-semibold">8.4k người xem</div>
+    </figure>
+    <div class="card-body p-4">
+      <div class="flex gap-3">
+        <div class="avatar">
+          <div class="w-10 h-10 rounded-full">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop" />
+          </div>
+        </div>
+        <div>
+          <h2 class="card-title text-base line-clamp-1 group-hover:text-primary transition-colors">Sáng tác nhạc Chill Lofi trực tiếp</h2>
+          <p class="text-sm text-gray-400">MelodyMaker</p>
+          <div class="flex gap-2 mt-2">
+            <div class="badge badge-outline text-xs">Âm nhạc</div>
+            <div class="badge badge-outline text-xs">Thư giãn</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card bg-base-100 shadow-xl group cursor-pointer hover:-translate-y-1 transition-transform duration-300 hidden xl:block">
+    <figure class="relative">
+      <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?q=80&w=2070&auto=format&fit=crop" alt="Stream thumbnail" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+      <div class="absolute top-2 left-2 badge badge-success text-xs font-bold">TRỰC TIẾP</div>
+      <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-semibold">5.2k người xem</div>
+    </figure>
+    <div class="card-body p-4">
+      <div class="flex gap-3">
+        <div class="avatar">
+          <div class="w-10 h-10 rounded-full">
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1974&auto=format&fit=crop" />
+          </div>
+        </div>
+        <div>
+          <h2 class="card-title text-base line-clamp-1 group-hover:text-primary transition-colors">Talkshow: Tương lai của AI 2026</h2>
+          <p class="text-sm text-gray-400">TechTalks_VN</p>
+          <div class="flex gap-2 mt-2">
+            <div class="badge badge-outline text-xs">Công nghệ</div>
+            <div class="badge badge-outline text-xs">Podcast</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mt-16">
+  <h2 class="cursor-default text-2xl md:text-3xl font-bold mb-6">Khám Phá Theo Thể Loại</h2>
+  <div class="flex flex-wrap gap-4">
+    <button class="btn btn-lg bg-base-100 hover:bg-primary hover:text-primary-content border-none flex-1 min-w-[150px]">🎮 eSports</button>
+    <button class="btn btn-lg bg-base-100 hover:bg-primary hover:text-primary-content border-none flex-1 min-w-[150px]">🎵 Âm Nhạc</button>
+    <button class="btn btn-lg bg-base-100 hover:bg-primary hover:text-primary-content border-none flex-1 min-w-[150px]">🎙️ Trò Chuyện</button>
+    <button class="btn btn-lg bg-base-100 hover:bg-primary hover:text-primary-content border-none flex-1 min-w-[150px]">🎨 Sáng Tạo</button>
+    <button class="btn btn-lg bg-base-100 hover:bg-primary hover:text-primary-content border-none flex-1 min-w-[150px]">🏆 Thể Thao</button>
+  </div>
+</div>

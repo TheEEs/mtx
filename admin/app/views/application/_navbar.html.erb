@@ -1,0 +1,35 @@
+<div class="navbar bg-base-100/90 backdrop-blur-md sticky top-0 z-50 px-4 md:px-8 shadow-lg border-b border-base-300">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+      </div>
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li><%= link_to "Khám phá", rooms_path %></li>
+        <li><a>Thể loại</a></li>
+        <li><a>Sự kiện</a></li>
+        <li><a>Đăng nhập</a></li>
+      </ul>
+    </div>
+    <%= link_to root_path, class:"btn btn-ghost text-xl font-bold tracking-widest uppercase text-primary" do %>
+      MTX<span class="text-white">trandat.icu</span>
+    <% end %>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1 font-semibold">
+      <li><%= link_to "Khám phá", rooms_path, class: "hover:text-primary transition" %></li>
+      <li><a class="hover:text-primary transition">Thể loại</a></li>
+      <li><a class="hover:text-primary transition">Sự kiện</a></li>
+    </ul>
+  </div>
+  <div class="hidden sm:flex navbar-end gap-2">
+    <button class="btn btn-ghost btn-circle">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+    </button>
+    <% if authenticated? %>
+      <%= button_to t("actions.session.delete"), session_path, method: :delete, class: "btn btn-primary btn-sm md:btn-md rounded-full px-6" %>
+    <% else %>
+      <%= link_to t("actions.session.new"), new_session_path, class: "btn btn-primary btn-sm md:btn-md rounded-full px-6" %>
+    <% end %>
+  </div>
+</div>
