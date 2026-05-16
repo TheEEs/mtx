@@ -108,11 +108,11 @@ class RoomsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def room_params
-      params.expect(room: [ :name, :owner, :description, :valid_from, :valid_to, :timezone])
+      params.expect(room: [:name, :owner, :description, :valid_from, :valid_to, :timezone])
     end
 
     def set_timezone
-      Time.use_zone(params.dig(:room,:timezone) || @room&.timezone || "UTC") do 
+      Time.use_zone(@room&.timezone || params.dig(:room,:timezone) || "UTC") do 
         yield 
       end
     end
