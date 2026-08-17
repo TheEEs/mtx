@@ -12,7 +12,7 @@ class Room < ApplicationRecord
             name: self.name,
             #updated_at: self.updated_at.to_i
         }
-        JWT.encode(payload, Rails.application.credentials.key, "HS512")
+        JWT.encode(payload, Rails.application.credentials.secret_key_base, "HS512")
     end
 
 
