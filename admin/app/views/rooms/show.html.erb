@@ -47,14 +47,10 @@
         <%= t("room_show.unavailable_desc") %>
       </p>
       <div class="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-base-200/60 text-xs text-base-content/70">
-        <% if @room.valid_from.present? %>
+        <% if @room.not_started? %>
           <span class="text-base-content/50"><%= Room.human_attribute_name(:valid_from) %>:</span>
           <span class="font-medium"><%= local_time(@room.valid_from, :long) %></span>
-        <% end %>
-        <% if @room.valid_from.present? && @room.valid_to.present? %>
-          <span class="text-base-content/50">–</span>
-        <% end %>
-        <% if @room.valid_to.present? %>
+        <% elsif @room.expired? %>
           <span class="text-base-content/50"><%= Room.human_attribute_name(:valid_to) %>:</span>
           <span class="font-medium"><%= local_time(@room.valid_to, :long) %></span>
         <% end %>
@@ -103,7 +99,7 @@
 
       <!-- Action Buttons -->
       <div class="flex items-center gap-2 shrink-0">
-        <% unless @room.expired? %>
+        <% if @room.available? %>
           <%= button_to toggle_stream_path(@room), method: :delete, class: "btn btn-sm btn-ghost border border-base-content/20 rounded-md gap-1.5 text-xs font-medium cursor-pointer", id: "toggle_stream_#{@room.hashid}_1" do %>
             <% if @room.blocked %>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

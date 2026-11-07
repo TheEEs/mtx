@@ -3,6 +3,7 @@ en:
   pundit:
     not_authorized: "You are not authorized to perform this action."
   flash:
+    rate_limited: "Try again later."
     success:
       created: "%{model} was successfully created"
       updated: "%{model} was successfully updated"
@@ -15,6 +16,8 @@ en:
     session:
       new: "Sign In"
       delete: "Sign Out"
+    registration:
+      new: "Sign Up"
     stream:
       kick: "Kick stream"
       open: "Open stream"
@@ -135,6 +138,24 @@ en:
   auth:
     sign_in: "Sign In"
     sign_in_desc: "Sign in to manage and broadcast streams"
+    sign_up: "Sign Up"
+    sign_up_desc: "Create an account to manage and broadcast streams"
+    sign_up_button: "Create Account"
+    already_have_account: "Already have an account?"
+    sign_up_now: "Sign up now"
+    sign_in_now: "Sign in now"
+    no_account_yet: "Don't have an account yet?"
+    resend_confirmation: "Resend Confirmation Email"
+    resend_confirmation_desc: "Enter your email address to receive confirmation instructions"
+    resend_confirmation_button: "Resend Confirmation"
+    resend_confirmation_link: "Didn't receive confirmation email?"
+    registration_success_check_email: "Account created! Please check your email to confirm your account before signing in."
+    confirmation_instructions_sent: "If your account exists and is not confirmed, confirmation instructions have been sent to your email."
+    already_confirmed: "Your account is already confirmed. Please sign in."
+    confirmation_success: "Email confirmed successfully! Welcome to the platform."
+    invalid_confirmation_link: "Confirmation link is invalid or has expired. Please request a new confirmation email."
+    unconfirmed_email_alert: "Your account has not been confirmed yet. Please check your email or request a new confirmation below."
+    invalid_credentials: "Try another email address or password."
     email: "Email Address"
     password: "Password"
     password_new: "New Password"
@@ -146,3 +167,12 @@ en:
     reset_password: "Reset Password"
     reset_password_desc: "Enter a new password for your account"
     save_password: "Save Password"
+  mailers:
+    confirmation:
+      subject: "Confirm your email address - MTX Live"
+      heading: "Confirm your email address"
+      subheading: "Thank you for creating an account with MTX Live!"
+      body_1: "Please click the button below to confirm your email and activate your account:"
+      action_button: "Confirm Account"
+      expire_note: "This confirmation link will expire in 24 hours."
+      fallback_note: "If the button above does not work, copy and paste the following link into your browser:"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_07_161500) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_07_220000) do
   create_table "rooms", force: :cascade do |t|
     t.boolean "blocked", default: false
     t.datetime "created_at", null: false
@@ -42,6 +42,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_07_161500) do
     t.string "email_address", null: false
     t.string "password_digest", null: false
     t.datetime "updated_at", null: false
+    t.datetime "confirmed_at"
+    t.index ["confirmed_at"], name: "index_users_on_confirmed_at"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 

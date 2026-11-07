@@ -1,0 +1,45 @@
+<% content_for :title, t("auth.resend_confirmation") %>
+
+<div class="max-w-md mx-auto py-8">
+  <div class="rounded-xl border border-base-200/80 bg-base-100/60 p-6 sm:p-8 space-y-6">
+    <div class="space-y-1 text-center">
+      <h1 class="text-2xl font-bold tracking-tight text-base-content">
+        <%= t("auth.resend_confirmation") %>
+      </h1>
+      <p class="text-xs text-base-content/60">
+        <%= t("auth.resend_confirmation_desc") %>
+      </p>
+    </div>
+
+    <% if alert = flash[:alert] %>
+      <div class="p-3 rounded-lg border border-error/30 bg-error/10 text-error text-xs font-medium" id="alert">
+        <%= alert %>
+      </div>
+    <% end %>
+
+    <% if notice = flash[:notice] %>
+      <div class="p-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-medium" id="notice">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <%= form_with url: confirmations_url, class: "space-y-4" do |form| %>
+      <div class="space-y-1.5">
+        <%= form.label :email_address, t("auth.email"), class: "text-xs font-medium text-base-content/80" %>
+        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "email", placeholder: "you@example.com", value: params[:email_address], class: "input input-bordered w-full rounded-md text-sm bg-base-100/70" %>
+      </div>
+
+      <div class="pt-2">
+        <%= form.submit t("auth.resend_confirmation_button"), class: "btn btn-primary w-full rounded-md font-medium text-sm cursor-pointer" %>
+      </div>
+    <% end %>
+
+    <div class="pt-4 border-t border-base-200/80 text-center space-y-2">
+      <p class="text-xs text-base-content/70">
+        <%= link_to t("auth.back_to_sign_in"), new_session_path, class: "text-primary font-medium hover:underline" %>
+        <span class="mx-1.5 text-base-content/40">•</span>
+        <%= link_to t("auth.sign_up_now"), new_registration_path, class: "text-base-content/70 hover:text-base-content" %>
+      </p>
+    </div>
+  </div>
+</div>

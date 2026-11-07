@@ -1,0 +1,30 @@
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px; color: #1e293b; background-color: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0;">
+  <div style="text-align: center; margin-bottom: 24px;">
+    <h2 style="font-size: 22px; font-weight: bold; color: #0f172a; margin: 0 0 8px 0;">
+      <%= t("mailers.confirmation.heading", default: "Xác nhận địa chỉ email của bạn") %>
+    </h2>
+    <p style="font-size: 14px; color: #64748b; margin: 0;">
+      <%= t("mailers.confirmation.subheading", default: "Cảm ơn bạn đã đăng ký tài khoản tại MTX Live!") %>
+    </p>
+  </div>
+
+  <p style="font-size: 14px; line-height: 1.6; margin: 16px 0;">
+    <%= t("mailers.confirmation.body_1", default: "Vui lòng bấm vào nút bên dưới để xác nhận email và kích hoạt tài khoản của bạn:") %>
+  </p>
+
+  <div style="text-align: center; margin: 28px 0;">
+    <%= link_to t("mailers.confirmation.action_button", default: "Xác nhận tài khoản"),
+                confirm_email_url(@user.email_confirmation_token),
+                style: "display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 28px; border-radius: 6px;" %>
+  </div>
+
+  <p style="font-size: 12px; color: #64748b; line-height: 1.5; margin: 20px 0 0 0;">
+    <%= t("mailers.confirmation.expire_note", default: "Liên kết xác nhận này sẽ hết hạn sau 24 giờ.") %>
+  </p>
+  <p style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin: 8px 0 0 0;">
+    <%= t("mailers.confirmation.fallback_note", default: "Nếu nút trên không hoạt động, hãy sao chép và dán liên kết sau vào trình duyệt của bạn:") %><br>
+    <a href="<%= confirm_email_url(@user.email_confirmation_token) %>" style="color: #2563eb; word-break: break-all;">
+      <%= confirm_email_url(@user.email_confirmation_token) %>
+    </a>
+  </p>
+</div>

@@ -3,6 +3,7 @@ vi:
   pundit:
     not_authorized: "Bạn không có quyền thực hiện thao tác này."
   flash:
+    rate_limited: "Vui lòng thử lại sau ít phút."
     success:
       created: "Tạo %{model} thành công"
       updated: "Cập nhật %{model} thành công"
@@ -15,6 +16,8 @@ vi:
     session:
       new: Đăng nhập
       delete: Đăng xuất
+    registration:
+      new: Đăng ký
     stream:
       kick: "Khóa luồng phát"
       open: "Mở luồng phát"
@@ -299,6 +302,24 @@ vi:
   auth:
     sign_in: "Đăng nhập"
     sign_in_desc: "Đăng nhập để quản trị và phát sóng trực tuyến"
+    sign_up: "Đăng ký tài khoản"
+    sign_up_desc: "Tạo tài khoản để bắt đầu quản trị và phát sóng trực tuyến"
+    sign_up_button: "Tạo tài khoản"
+    already_have_account: "Đã có tài khoản?"
+    sign_up_now: "Đăng ký ngay"
+    sign_in_now: "Đăng nhập ngay"
+    no_account_yet: "Chưa có tài khoản?"
+    resend_confirmation: "Gửi lại email xác nhận"
+    resend_confirmation_desc: "Nhập email của bạn để nhận lại liên kết xác nhận tài khoản"
+    resend_confirmation_button: "Gửi lại liên kết xác nhận"
+    resend_confirmation_link: "Chưa nhận được email xác nhận?"
+    registration_success_check_email: "Đăng ký thành công! Vui lòng kiểm tra email để xác nhận tài khoản trước khi đăng nhập."
+    confirmation_instructions_sent: "Nếu tài khoản tồn tại và chưa được xác nhận, hướng dẫn xác nhận đã được gửi lại vào email của bạn."
+    already_confirmed: "Tài khoản của bạn đã được xác nhận trước đó. Vui lòng đăng nhập."
+    confirmation_success: "Xác nhận email thành công! Chào mừng bạn đã tham gia."
+    invalid_confirmation_link: "Liên kết xác nhận không hợp lệ hoặc đã hết hạn. Vui lòng yêu cầu gửi lại email xác nhận mới."
+    unconfirmed_email_alert: "Tài khoản của bạn chưa được xác nhận qua email. Vui lòng kiểm tra email hoặc yêu cầu gửi lại liên kết xác nhận bên dưới."
+    invalid_credentials: "Địa chỉ email hoặc mật khẩu không chính xác."
     email: "Địa chỉ Email"
     password: "Mật khẩu"
     password_new: "Mật khẩu mới"
@@ -310,4 +331,13 @@ vi:
     reset_password: "Cập nhật mật khẩu"
     reset_password_desc: "Nhập mật khẩu mới cho tài khoản của bạn"
     save_password: "Lưu mật khẩu"
+  mailers:
+    confirmation:
+      subject: "Xác nhận địa chỉ email của bạn - MTX Live"
+      heading: "Xác nhận địa chỉ email của bạn"
+      subheading: "Cảm ơn bạn đã đăng ký tài khoản tại MTX Live!"
+      body_1: "Vui lòng bấm vào nút bên dưới để xác nhận email và kích hoạt tài khoản của bạn:"
+      action_button: "Xác nhận tài khoản"
+      expire_note: "Liên kết xác nhận này sẽ hết hạn sau 24 giờ."
+      fallback_note: "Nếu nút trên không hoạt động, hãy sao chép và dán liên kết sau vào trình duyệt của bạn:"
 

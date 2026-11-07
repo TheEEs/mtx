@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
+  resource :registration, only: %i[new create]
+  get "sign_up", to: "registrations#new"
+  resources :confirmations, param: :token, only: %i[new create show]
+  get "confirmations/:token", to: "confirmations#show", as: :confirm_email
+
   root "home#index"
   get "home/index"
   resources :rooms

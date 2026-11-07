@@ -41,5 +41,15 @@
         <%= form.submit t("auth.sign_in"), class: "btn btn-primary w-full rounded-md font-medium text-sm cursor-pointer" %>
       </div>
     <% end %>
+
+    <div class="pt-4 border-t border-base-200/80 text-center space-y-2">
+      <p class="text-xs text-base-content/70">
+        <%= t("auth.no_account_yet") %>
+        <%= link_to t("auth.sign_up_now"), new_registration_path, class: "text-primary font-medium hover:underline ml-1" %>
+      </p>
+      <p class="text-xs">
+        <%= link_to t("auth.resend_confirmation_link"), new_confirmation_path, class: "text-base-content/50 hover:text-base-content transition" %>
+      </p>
+    </div>
   </div>
 </div>

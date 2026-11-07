@@ -56,6 +56,7 @@
           <% end %>
           <%= button_to t("actions.session.delete"), session_path, method: :delete, class: "btn btn-sm btn-ghost rounded-md text-xs text-base-content/70 hover:text-base-content cursor-pointer" %>
         <% else %>
+          <%= link_to t("actions.registration.new"), new_registration_path, class: "btn btn-sm btn-primary rounded-md text-xs font-medium" %>
           <%= link_to t("actions.session.new"), new_session_path, class: "btn btn-sm btn-ghost border border-base-content/15 rounded-md text-xs font-medium" %>
         <% end %>
 
@@ -77,6 +78,7 @@
               </li>
             <% else %>
               <div class="divider my-1"></div>
+              <li><%= link_to t("actions.registration.new"), new_registration_path %></li>
               <li><%= link_to t("actions.session.new"), new_session_path %></li>
             <% end %>
             <div class="divider my-1"></div>
