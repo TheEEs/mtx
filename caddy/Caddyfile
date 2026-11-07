@@ -1,8 +1,8 @@
-#{
-#	acme_dns linode {$LINODE_APIKEY}
-#}
+{
+	acme_dns linode {$LINODE_APIKEY}
+}
 mtx.trandat.icu, http://mtx.localhost {
 	@whiep path */whip */whip/* */whep */whep/*
-	reverse_proxy @whiep mediamtx:8889
-	reverse_proxy app:3000
+	reverse_proxy @whiep {$MEDIAMTX_HOST:mediamtx}:8889
+	reverse_proxy {$APP_HOST:app:3000}
 }

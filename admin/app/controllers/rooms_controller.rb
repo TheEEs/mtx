@@ -91,7 +91,7 @@ class RoomsController < ApplicationController
         format.json { head :no_content }
         format.turbo_stream
         res = HTTParty.post(
-          "http://mediamtx:7498/v3/webrtcsessions/kick/#{@room.stream_id}"
+          "http://#{ENV.fetch('MEDIAMTX_HOST', 'mediamtx')}:7498/v3/webrtcsessions/kick/#{@room.stream_id}"
         )
         raise "Cannot kickout stream" unless res.code == 200
       else
