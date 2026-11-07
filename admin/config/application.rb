@@ -21,7 +21,16 @@ module Admin
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
+    # Allow requests from local, docker container, and domain hosts
+    config.hosts << "app"
     config.hosts << "app:3000"
+    config.hosts << "localhost"
+    config.hosts << "127.0.0.1"
+    config.hosts << "www.example.com"
+    config.hosts << "example.com"
+    config.hosts << /.*\.localhost/
+    config.hosts << /.*\.trandat\.icu/
+
     config.i18n.available_locales = [ :vi, :en ]
     config.i18n.default_locale = "vi"
     # config.eager_load_paths << Rails.root.join("extras")
