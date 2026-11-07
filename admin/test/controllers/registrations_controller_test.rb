@@ -21,7 +21,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil new_user
     assert_not new_user.confirmed?
 
-    assert_enqueued_email_with UsersMailer, :confirmation, args: [new_user]
+    assert_enqueued_email_with UsersMailer, :confirmation, args: [ new_user ]
     assert_redirected_to new_session_path
   end
 

@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
-  allow_unauthenticated_access only: [:auth]
-  skip_before_action :verify_authenticity_token, only: [:auth]
+  allow_unauthenticated_access only: [ :auth ]
+  skip_before_action :verify_authenticity_token, only: [ :auth ]
   before_action :set_room, only: %i[ show edit update destroy toggle_stream ]
   around_action :set_timezone, only: %i[ auth update create edit ]
   # GET /rooms or /rooms.json
@@ -32,14 +32,14 @@ class RoomsController < ApplicationController
     token = params[:token]
     payload, header = JWT.decode token, Rails.application.credentials.secret_key_base, true, { algorithm: 'HS512' }
     if token != room.jwt || room.blocked
-      raise "unauthorized" 
+      raise "unauthorized"
     end
     if room.update(stream_id: params[:id])
       render plain: "OK", layout: false, status: :ok
-    else 
+    else
       raise "unauthorized"
     end
-  rescue 
+  rescue
     render plain: "Error", layout: false, status: :unauthorized
   end
 
@@ -50,7 +50,7 @@ class RoomsController < ApplicationController
     authorize @room
     respond_to do |format|
       if @room.save
-        format.html { redirect_to @room, notice: I18n.t("flash.success.created", model: Room.model_name.human)}
+        format.html { redirect_to @room, notice: I18n.t("flash.success.created", model: Room.model_name.human) }
         format.json { render :show, status: :created, location: @room }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -95,12 +95,12 @@ class RoomsController < ApplicationController
         )
         raise "Cannot kickout stream" unless res.code == 200
       else
-        format.html { render :show, status: :unprocessable_entity}
-        format.json {render json: {error: :unprocessable_entity}, status: :unprocessable_entity}
+        format.html { render :show, status: :unprocessable_entity }
+        format.json { render json: { error: :unprocessable_entity }, status: :unprocessable_entity }
       end
-      rescue 
-        format.html { render :show, status: :unprocessable_entity}
-        format.json {render json: {error: :unprocessable_entity}, status: :unprocessable_entity}
+      rescue
+        format.html { render :show, status: :unprocessable_entity }
+        format.json { render json: { error: :unprocessable_entity }, status: :unprocessable_entity }
     end
   end
 
@@ -113,12 +113,12 @@ class RoomsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def room_params
-      params.expect(room: [:name, :owner, :description, :valid_from, :valid_to, :timezone])
+      params.expect(room: [ :name, :owner, :description, :valid_from, :valid_to, :timezone ])
     end
 
     def set_timezone
-      Time.use_zone(@room&.timezone || params.dig(:room,:timezone) || "UTC") do 
-        yield 
+      Time.use_zone(@room&.timezone || params.dig(:room, :timezone) || "UTC") do
+        yield
       end
     end
 end

@@ -38,7 +38,7 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "create resends confirmation email for unconfirmed user" do
-    assert_enqueued_email_with UsersMailer, :confirmation, args: [@unconfirmed_user] do
+    assert_enqueued_email_with UsersMailer, :confirmation, args: [ @unconfirmed_user ] do
       post confirmations_path, params: { email_address: @unconfirmed_user.email_address }
     end
 

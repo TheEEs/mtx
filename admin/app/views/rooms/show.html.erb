@@ -1,6 +1,6 @@
 <% content_for(:title, @room.name) %>
 
-<div <%= %(data-video-token-value="#{@room.jwt}" data-video-url-value="#{@whepURL}" data-video-room-id-value="#{@room.hashid}" data-video-live-text-value="#{t('room_show.status_live')}" data-video-idle-text-value="#{t('room_show.status_idle')}" data-controller="video").html_safe if @room.available? %>
+<div <%= %(data-video-token-value="#{h(@room.jwt)}" data-video-url-value="#{h(@whepURL)}" data-video-room-id-value="#{h(@room.hashid)}" data-video-live-text-value="#{t('room_show.status_live')}" data-video-idle-text-value="#{t('room_show.status_idle')}" data-controller="video").html_safe if @room.available? %>
      class="space-y-6 max-w-4xl mx-auto"
 >
   <% if notice.present? %>

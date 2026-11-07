@@ -24,7 +24,7 @@ class Room < ApplicationRecord
             nbf: self.valid_from.to_i,
             id: self.hashid,
             name: self.name,
-            #updated_at: self.updated_at.to_i
+          # updated_at: self.updated_at.to_i
         }
         JWT.encode(payload, Rails.application.credentials.secret_key_base, "HS512")
     end
@@ -36,7 +36,7 @@ class Room < ApplicationRecord
         return res.code == 200
     end
 
-    private 
+    private
     def valid_from_must_be_less_than_valid_to
         if (valid_to && valid_from) and valid_from >= valid_to
             formatted_time = I18n.l(valid_to, format: :long)

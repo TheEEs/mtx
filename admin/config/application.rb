@@ -22,7 +22,7 @@ module Admin
     # in config/environments, which are processed later.
     #
     config.hosts << "app:3000"
-    config.i18n.available_locales = [:vi, :en]
+    config.i18n.available_locales = [ :vi, :en ]
     config.i18n.default_locale = "vi"
     # config.eager_load_paths << Rails.root.join("extras")
   end
