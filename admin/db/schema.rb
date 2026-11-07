@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_25_052258) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_07_161500) do
   create_table "rooms", force: :cascade do |t|
     t.boolean "blocked", default: false
     t.datetime "created_at", null: false
@@ -22,8 +22,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_25_052258) do
     t.datetime "updated_at", null: false
     t.datetime "valid_from"
     t.datetime "valid_to"
+    t.integer "user_id"
     t.index ["name"], name: "index_rooms_on_name"
     t.index ["stream_id"], name: "index_rooms_on_stream_id"
+    t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -43,5 +45,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_25_052258) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "rooms", "users"
   add_foreign_key "sessions", "users"
 end

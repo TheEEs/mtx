@@ -8,7 +8,9 @@ export default class extends Controller {
     static values = {
         url: String,
         token: String,
-        roomId: String
+        roomId: String,
+        liveText: { type: String, default: "Đang phát" },
+        idleText: { type: String, default: "Chưa phát" }
     }
     connect() {
         this.whipUrlTarget.innerText = new URL(`${this.roomIdValue}/whip`, this.urlValue) + window.location.search
@@ -19,12 +21,12 @@ export default class extends Controller {
             token: this.tokenValue,
             onError: (err) => {
                 this.badgeTarget.classList.replace("badge-success", "badge-neutral");
-                this.badgeTextTarget.innerText = "Chưa phát"
+                this.badgeTextTarget.innerText = this.idleTextValue;
                 console.error(err);
             },
             onTrack: (evt) => {
                 this.badgeTarget.classList.replace("badge-neutral", "badge-success");
-                this.badgeTextTarget.innerText = "Đang phát"
+                this.badgeTextTarget.innerText = this.liveTextValue;
                 document.getElementById("playing_video").srcObject = evt.streams[0];
             },
             onDataChannel: (evt) => {

@@ -2,6 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import LocalTime from "local-time"
+import "local_time_vi"
 import { themeChange } from 'theme-change'
 
 LocalTime.start()

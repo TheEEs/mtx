@@ -1,45 +1,61 @@
 <!DOCTYPE html>
-<html data-theme="forest">
+<html lang="<%= I18n.locale %>">
   <head>
-    <title><%= content_for(:title) || "Admin" %></title>
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var theme = saved || 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+        document.addEventListener('turbo:before-render', function() {
+          try {
+            var t = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', t);
+          } catch (err) {}
+        });
+      })();
+    </script>
+    <title><%= content_for(:title) ? "#{content_for(:title)} • MTX" : "MTX Live" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Admin">
+    <meta name="application-name" content="MTX">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="locale" content="<%= I18n.locale %>">
     <%= yield :head %>
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <style>
       body {
-              font-family: 'Inter', sans-serif;
-          }
-               ::-webkit-scrollbar {
-        width: 8px;
-              }
-              ::-webkit-scrollbar-track {
-        background: #121212;
-              }
-              ::-webkit-scrollbar-thumb {
-        background: #dca54c;
-        border-radius: 4px;
-              }
-              ::-webkit-scrollbar-thumb:hover {
-        background: #b8863b;
-              }
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(128, 128, 128, 0.25);
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(128, 128, 128, 0.45);
+      }
     </style>
   </head>
-  <body class="bg-base-300 text-base-content antialiased">
+  <body class="min-h-screen flex flex-col bg-base-300 text-base-content antialiased selection:bg-base-content selection:text-base-100">
     <%= render partial: "navbar" %>
-    <main class="container mx-auto px-4 md:px-8 py-12">
+    <main class="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-6xl w-full">
       <%= yield %>
     </main>
     <%= render partial: "footer" %>

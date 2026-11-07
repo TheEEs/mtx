@@ -80,3 +80,5 @@ gem "rails-i18n", "~> 8.1"
 gem "htmlbeautifier", "~> 1.4", group: :development
 
 gem "httparty", "~> 0.24.2"
+
+gem "pundit", "~> 2.5"

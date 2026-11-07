@@ -6,6 +6,7 @@ pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "local-time" # @3.0.3
+pin "local_time_vi", to: "local_time_vi.js"
 pin "theme-change" # @2.5.0
 pin "publisher", to: "publisher.js"
 pin "reader", to: "reader.js"

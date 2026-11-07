@@ -1,35 +1,115 @@
-<div class="navbar bg-base-100/90 backdrop-blur-md sticky top-0 z-50 px-4 md:px-8 shadow-lg border-b border-base-300">
-  <div class="navbar-start">
-    <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+<header class="sticky top-0 z-40 w-full border-b border-base-200/80 bg-base-100/85 backdrop-blur-md">
+  <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between gap-4">
+      <!-- Brand -->
+      <div class="flex items-center gap-6">
+        <%= link_to root_path, class: "flex items-center gap-2.5 font-semibold tracking-tight transition hover:opacity-80" do %>
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-base-content text-base-100 font-bold text-sm tracking-tight">
+            MTX
+          </span>
+          <span class="text-sm font-medium text-base-content/70 hidden sm:inline">
+            <%= t("nav.live") %>
+          </span>
+        <% end %>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+          <%= link_to t("nav.home"), root_path, class: "px-3 py-1.5 rounded-md hover:bg-base-200 text-base-content/80 hover:text-base-content transition" %>
+          <%= link_to t("nav.rooms"), rooms_path, class: "px-3 py-1.5 rounded-md hover:bg-base-200 text-base-content/80 hover:text-base-content transition" %>
+        </nav>
       </div>
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><%= link_to "Khám phá", rooms_path %></li>
-        <li><a>Thể loại</a></li>
-        <li><a>Sự kiện</a></li>
-        <li><a>Đăng nhập</a></li>
-      </ul>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Theme Switcher -->
+        <button type="button"
+                data-controller="theme"
+                data-action="click->theme#toggle"
+                data-title-light="<%= t('theme.switch_to_light') %>"
+                data-title-dark="<%= t('theme.switch_to_dark') %>"
+                class="btn btn-ghost btn-sm btn-square text-base-content/70 hover:text-base-content border border-base-content/15 rounded-md cursor-pointer transition"
+                title="<%= t('theme.switch_to_light') %>"
+                aria-label="<%= t('theme.toggle') %>"
+        >
+          <!-- Sun Icon (displayed in Dark mode to switch to Light) -->
+          <svg data-theme-target="sunIcon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <!-- Moon Icon (displayed in Light mode to switch to Dark) -->
+          <svg data-theme-target="moonIcon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- Language Switcher -->
+        <div class="flex items-center text-[11px] font-semibold border border-base-content/15 rounded-md overflow-hidden">
+          <%= button_to "VI", set_locale_path(:vi), method: :post, data: { turbo_action: "replace" }, class: "px-2 py-1 transition cursor-pointer #{I18n.locale == :vi ? 'bg-base-content text-base-100 font-bold' : 'text-base-content/60 hover:text-base-content'}", title: "Tiếng Việt" %>
+          <%= button_to "EN", set_locale_path(:en), method: :post, data: { turbo_action: "replace" }, class: "px-2 py-1 transition cursor-pointer #{I18n.locale == :en ? 'bg-base-content text-base-100 font-bold' : 'text-base-content/60 hover:text-base-content'}", title: "English" %>
+        </div>
+
+        <% if authenticated? %>
+          <%= link_to new_room_path, class: "hidden sm:inline-flex items-center gap-1.5 btn btn-sm btn-ghost border border-base-content/15 rounded-md text-xs font-medium" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+            </svg>
+            <%= t("nav.new_room") %>
+          <% end %>
+          <%= button_to t("actions.session.delete"), session_path, method: :delete, class: "btn btn-sm btn-ghost rounded-md text-xs text-base-content/70 hover:text-base-content cursor-pointer" %>
+        <% else %>
+          <%= link_to t("actions.session.new"), new_session_path, class: "btn btn-sm btn-ghost border border-base-content/15 rounded-md text-xs font-medium" %>
+        <% end %>
+
+        <!-- Mobile Menu Dropdown -->
+        <div class="dropdown dropdown-end md:hidden">
+          <button tabindex="0" class="btn btn-ghost btn-sm btn-square" aria-label="Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+          <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 z-50 p-2 shadow-lg bg-base-100 rounded-lg w-52 border border-base-200">
+            <li><%= link_to t("nav.home"), root_path %></li>
+            <li><%= link_to t("nav.rooms"), rooms_path %></li>
+            <% if authenticated? %>
+              <li><%= link_to t("nav.new_room"), new_room_path %></li>
+              <div class="divider my-1"></div>
+              <li>
+                <%= button_to t("actions.session.delete"), session_path, method: :delete, class: "text-error" %>
+              </li>
+            <% else %>
+              <div class="divider my-1"></div>
+              <li><%= link_to t("actions.session.new"), new_session_path %></li>
+            <% end %>
+            <div class="divider my-1"></div>
+            <!-- Mobile Theme Switcher Row -->
+            <div class="px-2 py-1.5 flex items-center justify-between text-xs">
+              <span class="text-base-content/60"><%= t('theme.toggle') %></span>
+              <button type="button"
+                      data-controller="theme"
+                      data-action="click->theme#toggle"
+                      data-title-light="<%= t('theme.switch_to_light') %>"
+                      data-title-dark="<%= t('theme.switch_to_dark') %>"
+                      class="btn btn-ghost btn-xs btn-square text-base-content/70 hover:text-base-content border border-base-content/15 rounded cursor-pointer"
+                      aria-label="<%= t('theme.toggle') %>"
+              >
+                <svg data-theme-target="sunIcon" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg data-theme-target="moonIcon" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              </button>
+            </div>
+            <!-- Mobile Language Switcher Row -->
+            <div class="px-2 py-1.5 flex items-center justify-between text-xs">
+              <span class="text-base-content/60">Ngôn ngữ / Lang</span>
+              <div class="flex items-center text-[10px] font-semibold border border-base-content/15 rounded overflow-hidden">
+                <%= button_to "VI", set_locale_path(:vi), method: :post, data: { turbo_action: "replace" }, class: "px-1.5 py-0.5 #{I18n.locale == :vi ? 'bg-base-content text-base-100 font-bold' : 'text-base-content/60'}" %>
+                <%= button_to "EN", set_locale_path(:en), method: :post, data: { turbo_action: "replace" }, class: "px-1.5 py-0.5 #{I18n.locale == :en ? 'bg-base-content text-base-100 font-bold' : 'text-base-content/60'}" %>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
     </div>
-    <%= link_to root_path, class:"btn btn-ghost text-xl font-bold tracking-widest uppercase text-primary" do %>
-      MTX<span class="text-white">trandat.icu</span>
-    <% end %>
   </div>
-  <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1 font-semibold">
-      <li><%= link_to "Khám phá", rooms_path, class: "hover:text-primary transition" %></li>
-      <li><a class="hover:text-primary transition">Thể loại</a></li>
-      <li><a class="hover:text-primary transition">Sự kiện</a></li>
-    </ul>
-  </div>
-  <div class="hidden sm:flex navbar-end gap-2">
-    <button class="btn btn-ghost btn-circle">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-    </button>
-    <% if authenticated? %>
-      <%= button_to t("actions.session.delete"), session_path, method: :delete, class: "btn btn-primary btn-sm md:btn-md rounded-full px-6" %>
-    <% else %>
-      <%= link_to t("actions.session.new"), new_session_path, class: "btn btn-primary btn-sm md:btn-md rounded-full px-6" %>
-    <% end %>
-  </div>
-</div>
+</header>

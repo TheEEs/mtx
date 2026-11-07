@@ -1,11 +1,12 @@
 class RoomsController < ApplicationController
-  allow_unauthenticated_access only: [:index, :auth]
+  allow_unauthenticated_access only: [:auth]
   skip_before_action :verify_authenticity_token, only: [:auth]
   before_action :set_room, only: %i[ show edit update destroy toggle_stream ]
   around_action :set_timezone, only: %i[ auth update create edit ]
   # GET /rooms or /rooms.json
   def index
-    @rooms = Room.all
+    @rooms = policy_scope(Room).order(created_at: :desc)
+    authorize Room
   end
 
   # GET /rooms/1 or /rooms/1.json
@@ -15,7 +16,8 @@ class RoomsController < ApplicationController
 
   # GET /rooms/new
   def new
-    @room = Room.new
+    @room = current_user.rooms.build(owner: current_user.email_address)
+    authorize @room
   end
 
   # GET /rooms/1/edit
@@ -43,7 +45,9 @@ class RoomsController < ApplicationController
 
   # POST /rooms or /rooms.json
   def create
-    @room = Room.new(room_params)
+    @room = current_user.rooms.build(room_params)
+    @room.owner = current_user.email_address if @room.owner.blank?
+    authorize @room
     respond_to do |format|
       if @room.save
         format.html { redirect_to @room, notice: I18n.t("flash.success.created", model: Room.model_name.human)}
@@ -104,6 +108,7 @@ class RoomsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params.expect(:id))
+      authorize @room
     end
 
     # Only allow a list of trusted parameters through.

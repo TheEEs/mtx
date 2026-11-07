@@ -1,53 +1,63 @@
-<%= form_with(model: room, class: "space-y-6") do |form| %>
+<%= form_with(model: room, class: "space-y-5") do |form| %>
   <% if room.errors.any? %>
-    <div role="alert" class="alert alert-error shadow-sm mb-6">
-      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-      <div>
-        <h3 class="font-bold"><%= t "activerecord.errors.template.header.other", model: Room.model_name.human, count: room.errors.count %></h3>
-        <ul class="list-disc list-inside text-sm mt-1">
-          <% room.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
+    <div class="p-4 rounded-lg border border-error/30 bg-error/10 text-error text-sm space-y-1">
+      <div class="font-medium flex items-center gap-1.5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <%= t "activerecord.errors.template.header.other", model: Room.model_name.human, count: room.errors.count %>
       </div>
+      <ul class="list-disc list-inside text-xs space-y-0.5 opacity-90 pl-5">
+        <% room.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="form-control w-full">
-      <%= form.label :name, class: "label" do %>
-        <span class="label-text font-semibold"><%= Room.human_attribute_name(:name) %></span>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="space-y-1.5">
+      <%= form.label :name, class: "text-xs font-medium text-base-content/80" do %>
+        <%= Room.human_attribute_name(:name) %> <% if Room.required?(:name) %><span class="text-error">*</span><% end %>
       <% end %>
-      <%= form.text_field :name, class: "input input-bordered w-full #{'input-error' if room.errors[:name].any?}" %>
+      <%= form.text_field :name, placeholder: t("room_form.name_placeholder"), class: "input input-bordered w-full rounded-md text-sm bg-base-100/60 #{'input-error' if room.errors[:name].any?}" %>
     </div>
-    <div class="form-control w-full">
-      <%= form.label :owner, class: "label" do %>
-        <span class="label-text font-semibold"><%= Room.human_attribute_name(:owner) %></span>
+
+    <div class="space-y-1.5">
+      <%= form.label :owner, class: "text-xs font-medium text-base-content/80" do %>
+        <%= Room.human_attribute_name(:owner) %> <% if Room.required?(:owner) %><span class="text-error">*</span><% end %>
       <% end %>
-      <%= form.text_field :owner, class: "input input-bordered w-full #{'input-error' if room.errors[:owner].any?}" %>
+      <%= form.text_field :owner, placeholder: t("room_form.owner_placeholder"), class: "input input-bordered w-full rounded-md text-sm bg-base-100/60 #{'input-error' if room.errors[:owner].any?}" %>
     </div>
   </div>
-  <div class="form-control w-full">
-    <%= form.label :description, class: "label" do %>
-      <span class="label-text font-semibold"><%= Room.human_attribute_name(:description) %></span>
+
+  <div class="space-y-1.5">
+    <%= form.label :description, class: "text-xs font-medium text-base-content/80" do %>
+      <%= Room.human_attribute_name(:description) %> <% if Room.required?(:description) %><span class="text-error">*</span><% end %>
     <% end %>
-    <%= form.textarea :description, rows: 4, class: "textarea textarea-bordered w-full #{'textarea-error' if room.errors[:description].any?}" %>
+    <%= form.textarea :description, rows: 3, placeholder: t("room_form.description_placeholder"), class: "textarea textarea-bordered w-full rounded-md text-sm bg-base-100/60 leading-relaxed #{'textarea-error' if room.errors[:description].any?}" %>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="form-control w-full">
-      <%= form.label :valid_from, class: "label" do %>
-        <span class="label-text font-semibold"><%= Room.human_attribute_name(:valid_from) %></span>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="space-y-1.5">
+      <%= form.label :valid_from, class: "text-xs font-medium text-base-content/80" do %>
+        <%= Room.human_attribute_name(:valid_from) %> <% if Room.required?(:valid_from) %><span class="text-error">*</span><% end %>
       <% end %>
-      <%= form.datetime_field :valid_from, class: "input input-bordered w-full #{'input-error' if room.errors[:valid_from].any?}" %>
+      <%= form.datetime_field :valid_from, class: "input input-bordered w-full rounded-md text-sm bg-base-100/60 #{'input-error' if room.errors[:valid_from].any?}" %>
     </div>
-    <div class="form-control w-full">
-      <%= form.label :valid_to, class: "label" do %>
-        <span class="label-text font-semibold"><%= Room.human_attribute_name(:valid_to) %></span>
+
+    <div class="space-y-1.5">
+      <%= form.label :valid_to, class: "text-xs font-medium text-base-content/80" do %>
+        <%= Room.human_attribute_name(:valid_to) %> <% if Room.required?(:valid_to) %><span class="text-error">*</span><% end %>
       <% end %>
-      <%= form.datetime_field :valid_to, class: "input input-bordered w-full #{'input-error' if room.errors[:valid_to].any?}" %>
+      <%= form.datetime_field :valid_to, class: "input input-bordered w-full rounded-md text-sm bg-base-100/60 #{'input-error' if room.errors[:valid_to].any?}" %>
     </div>
   </div>
-  <%= form.hidden_field :timezone, data: {controller: "timezone"} %>
-  <div class="pt-4">
-    <%= form.submit class: "btn btn-primary w-full md:w-auto px-10 rounded-lg" %>
+
+  <%= form.hidden_field :timezone, data: { controller: "timezone" } %>
+
+  <div class="pt-4 flex items-center gap-3">
+    <%= form.submit (room.persisted? ? t("room_form.update") : t("room_form.create")), class: "btn btn-sm btn-primary rounded-md px-6 font-medium cursor-pointer" %>
+    <%= link_to t("actions.back"), rooms_path, class: "btn btn-sm btn-ghost rounded-md text-xs text-base-content/60 hover:text-base-content" %>
   </div>
 <% end %>

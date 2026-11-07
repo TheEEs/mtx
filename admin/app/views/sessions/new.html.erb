@@ -1,31 +1,45 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <% if alert = flash[:alert] %>
-    <p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="alert"><%= alert %></p>
-  <% end %>
+<% content_for :title, t("auth.sign_in") %>
 
-  <% if notice = flash[:notice] %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
-  <h1 class="font-bold text-4xl">Sign in</h1>
-
-  <%= form_with url: session_url, class: "contents" do |form| %>
-    <div class="my-5">
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
+<div class="max-w-md mx-auto py-8">
+  <div class="rounded-xl border border-base-200/80 bg-base-100/60 p-6 sm:p-8 space-y-6">
+    <div class="space-y-1 text-center">
+      <h1 class="text-2xl font-bold tracking-tight text-base-content">
+        <%= t("auth.sign_in") %>
+      </h1>
+      <p class="text-xs text-base-content/60">
+        <%= t("auth.sign_in_desc") %>
+      </p>
     </div>
 
-    <div class="my-5">
-      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-    </div>
+    <% if alert = flash[:alert] %>
+      <div class="p-3 rounded-lg border border-error/30 bg-error/10 text-error text-xs font-medium" id="alert">
+        <%= alert %>
+      </div>
+    <% end %>
 
-    <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-      <div class="inline">
-        <%= form.submit "Sign in", class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+    <% if notice = flash[:notice] %>
+      <div class="p-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-medium" id="notice">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <%= form_with url: session_url, class: "space-y-4" do |form| %>
+      <div class="space-y-1.5">
+        <%= form.label :email_address, t("auth.email"), class: "text-xs font-medium text-base-content/80" %>
+        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "admin@example.com", value: params[:email_address], class: "input input-bordered w-full rounded-md text-sm bg-base-100/70" %>
       </div>
 
-      <div class="mt-4 text-sm text-gray-500 sm:mt-0">
-        <%= link_to "Forgot password?", new_password_path, class: "text-gray-700 underline hover:no-underline" %>
+      <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+          <%= form.label :password, t("auth.password"), class: "text-xs font-medium text-base-content/80" %>
+          <%= link_to t("auth.forgot_password"), new_password_path, class: "text-xs text-base-content/50 hover:text-base-content transition" %>
+        </div>
+        <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "••••••••", maxlength: 72, class: "input input-bordered w-full rounded-md text-sm bg-base-100/70" %>
       </div>
-    </div>
-  <% end %>
+
+      <div class="pt-2">
+        <%= form.submit t("auth.sign_in"), class: "btn btn-primary w-full rounded-md font-medium text-sm cursor-pointer" %>
+      </div>
+    <% end %>
+  </div>
 </div>

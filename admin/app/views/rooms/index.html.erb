@@ -1,44 +1,60 @@
 <% content_for :title, t("activerecord.models.room") %>
-<div class="w-full space-y-8">
+
+<div class="space-y-6">
   <% if notice.present? %>
-    <div role="alert" class="alert alert-success shadow-sm mb-6">
-      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-      <span><%= notice %></span>
+    <div class="flex items-center justify-between gap-3 px-4 py-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-sm">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span><%= notice %></span>
+      </div>
     </div>
   <% end %>
-  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+
+  <!-- Page Header -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-2 border-b border-base-200/80">
     <div>
-      <h1 class="font-bold text-4xl"><%= t("activerecord.models.room") %></h1>
-      <p class="text-base-content/60 mt-1 italic">Danh sách các kênh phát sóng trực tuyến đang hoạt động.</p>
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-base-content">
+        <%= t("rooms_view.title") %>
+      </h1>
+      <p class="text-sm text-base-content/60 mt-1">
+        <%= t("rooms_view.desc") %>
+      </p>
     </div>
-    <%= link_to new_room_path, class: "btn btn-primary rounded-lg" do %>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+    <%= link_to new_room_path, class: "btn btn-sm btn-primary rounded-md px-4 font-medium inline-flex items-center gap-1.5" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
       </svg>
       <%= t("actions.new", model: Room.model_name.human) %>
     <% end %>
   </div>
-  <div class="bg-base-100 rounded-xl shadow-xl overflow-hidden border border-base-300">
+
+  <!-- Rooms Table -->
+  <div class="rounded-xl border border-base-200/80 bg-base-100/50 overflow-hidden">
     <div class="overflow-x-auto">
-      <table class="table table-zebra w-full">
+      <table class="w-full text-left text-sm">
         <thead>
-          <tr class="bg-base-200/50">
-            <th class="text-sm font-semibold uppercase"><%= Room.human_attribute_name(:name) %></th>
-            <th class="hidden md:table-cell text-sm font-semibold uppercase"><%= Room.human_attribute_name(:owner) %></th>
-            <th class="hidden lg:table-cell text-sm font-semibold uppercase"><%= Room.human_attribute_name(:valid_from) %></th>
-            <th class="hidden lg:table-cell text-sm font-semibold uppercase"><%= Room.human_attribute_name(:valid_to) %></th>
-            <th class="text-right text-sm font-semibold uppercase">Thao tác</th>
+          <tr class="border-b border-base-200/80 bg-base-200/30 text-xs font-medium text-base-content/60 uppercase tracking-wider">
+            <th class="py-3 px-4 sm:px-6"><%= Room.human_attribute_name(:name) %></th>
+            <th class="py-3 px-4 hidden md:table-cell"><%= Room.human_attribute_name(:owner) %></th>
+            <th class="py-3 px-4 hidden lg:table-cell"><%= t("rooms_view.headers.time") %></th>
+            <th class="py-3 px-4 text-center"><%= t("rooms_view.headers.status") %></th>
+            <th class="py-3 px-4 sm:px-6 text-right"><%= t("rooms_view.headers.actions") %></th>
           </tr>
         </thead>
-        <tbody id="rooms">
+        <tbody id="rooms" class="divide-y divide-base-200/60">
           <% if @rooms.any? %>
             <%= render @rooms %>
           <% else %>
             <tr>
-              <td colspan="4" class="text-center py-20">
-                <div class="flex flex-col items-center gap-3 opacity-30">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
-                  <p class="font-medium text-xl">Chưa có kênh nào được tạo.</p>
+              <td colspan="5" class="py-16 text-center text-base-content/50">
+                <div class="flex flex-col items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 stroke-current opacity-40" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                  <p class="text-sm font-medium"><%= t("rooms_view.empty") %></p>
                 </div>
               </td>
             </tr>
