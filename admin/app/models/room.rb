@@ -23,7 +23,7 @@ class Room < ApplicationRecord
             exp: self.valid_to.to_i,
             nbf: self.valid_from.to_i,
             id: self.hashid,
-            name: self.name,
+            name: self.name
           # updated_at: self.updated_at.to_i
         }
         JWT.encode(payload, Rails.application.credentials.secret_key_base, "HS512")
@@ -33,7 +33,7 @@ class Room < ApplicationRecord
         res = HTTParty.post(
           "http://mediamtx:7498/v3/webrtcsessions/kick/#{stream_id}"
         )
-        return res.code == 200
+        res.code == 200
     end
 
     private

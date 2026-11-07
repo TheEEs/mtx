@@ -30,7 +30,7 @@ class RoomsController < ApplicationController
     room_id = params[:path]
     room = Room.find(room_id)
     token = params[:token]
-    payload, header = JWT.decode token, Rails.application.credentials.secret_key_base, true, { algorithm: 'HS512' }
+    payload, header = JWT.decode token, Rails.application.credentials.secret_key_base, true, { algorithm: "HS512" }
     if token != room.jwt || room.blocked
       raise "unauthorized"
     end
