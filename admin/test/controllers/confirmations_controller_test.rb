@@ -18,8 +18,6 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
 
     get confirm_email_path(token)
 
-    binding.pry
-
     assert @unconfirmed_user.reload.confirmed?
     assert_redirected_to root_path
     assert cookies[:session_id]
