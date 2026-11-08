@@ -7,4 +7,4 @@
 
 <%= confirm_email_url(@user.email_confirmation_token) %>
 
-<%= t("mailers.confirmation.expire_note", default: "Liên kết xác nhận này sẽ hết hạn sau 24 giờ.") %>
+<%= t("mailers.confirmation.expire_note", default: "Liên kết xác nhận này sẽ hết hạn sau %{time}.", time: distance_of_time_in_words(0, @user.email_confirmation_token_expires_in)) %>

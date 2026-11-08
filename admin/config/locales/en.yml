@@ -174,5 +174,9 @@ en:
       subheading: "Thank you for creating an account with MTX Live!"
       body_1: "Please click the button below to confirm your email and activate your account:"
       action_button: "Confirm Account"
-      expire_note: "This confirmation link will expire in 24 hours."
+      expire_note: "This confirmation link will expire in %{time}."
       fallback_note: "If the button above does not work, copy and paste the following link into your browser:"
+    password_reset:
+      reset_instruction: "You can reset your password by clicking following link:"
+      expire_time: "This link will expire in"
+      link: "Reset my password"

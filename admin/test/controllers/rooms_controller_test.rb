@@ -63,7 +63,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
     get room_url(@room)
     assert_response :success
     assert_select "video#playing_video", count: 0
-    assert_select "h2", text: I18n.t("room_show.not_started_title")
+    assert_select "h2", text: I18n.t("room_show.unavailable_title")
   end
 
   test "should get edit for owner" do

@@ -338,6 +338,9 @@ vi:
       subheading: "Cảm ơn bạn đã đăng ký tài khoản tại MTX Live!"
       body_1: "Vui lòng bấm vào nút bên dưới để xác nhận email và kích hoạt tài khoản của bạn:"
       action_button: "Xác nhận tài khoản"
-      expire_note: "Liên kết xác nhận này sẽ hết hạn sau 24 giờ."
+      expire_note: "Liên kết xác nhận này sẽ hết hạn sau %{time}."
       fallback_note: "Nếu nút trên không hoạt động, hãy sao chép và dán liên kết sau vào trình duyệt của bạn:"
-
+    password_reset:
+      reset_instruction: "Bạn có thể đặt lại mật khẩu của mình bằng cách nhấp vào liên kết sau:"
+      expire_time: "Liên kết này sẽ hết hạn sau"
+      link: "Đặt lại mật khẩu của tôi"
