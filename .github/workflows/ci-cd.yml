@@ -201,6 +201,7 @@ jobs:
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
+
           # Boot accessory containers (MediaMTX & Caddy) if not running, or reboot them
           bin/kamal accessory reboot all || bin/kamal accessory boot all
 
