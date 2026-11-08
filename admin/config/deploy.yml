@@ -9,9 +9,8 @@ servers:
   web:
     hosts:
       - <%= ENV.fetch("SERVER_IP", "127.0.0.1") %>
-
-# Caddy handles front-facing reverse proxy and SSL, so disable built-in kamal-proxy
-proxy: false
+    # Caddy handles front-facing reverse proxy and SSL, so disable built-in kamal-proxy
+    proxy: false
 
 # Where you keep your container images.
 registry:
@@ -52,22 +51,24 @@ accessories:
   mediamtx:
     image: <%= "ghcr.io/#{ENV.fetch('GITHUB_REPOSITORY', 'owner/mtx').downcase}/mediamtx:latest" %>
     host: <%= ENV.fetch("SERVER_IP", "127.0.0.1") %>
-    port:
-      - "8890:8890/udp"
-      - "8189:8189/udp"
-      - "8554:8554"
-      - "1935:1935"
-      - "8889:8889"
+    options:
+      publish:
+        - "8890:8890/udp"
+        - "8189:8189/udp"
+        #- "8554:8554"
+        #- "1935:1935"
+        #- "8889:8889"
     files:
       - ../mediamtx/mediamtx.yml:/mediamtx.yml
 
   caddy:
     image: <%= "ghcr.io/#{ENV.fetch('GITHUB_REPOSITORY', 'owner/mtx').downcase}/caddy:latest" %>
     host: <%= ENV.fetch("SERVER_IP", "127.0.0.1") %>
-    port:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
+    options:
+      publish:
+        - "80:80"
+        - "443:443"
+        - "443:443/udp"
     files:
       - ../caddy/Caddyfile:/etc/caddy/Caddyfile
     directories:
