@@ -9,7 +9,6 @@ servers:
   web:
     hosts:
       - <%= ENV.fetch("SERVER_IP", "127.0.0.1") %>
-    port: "3000:80"
 
 # Caddy handles front-facing reverse proxy and SSL, so disable built-in kamal-proxy
 proxy: false
