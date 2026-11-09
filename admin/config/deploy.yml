@@ -78,5 +78,5 @@ accessories:
       secret:
         - LINODE_APIKEY
       clear:
-        APP_HOST: 127.0.0.1:3000
+        APP_HOST: admin-web-<%= ENV.fetch("GITHUB_SHA", "latest") %>
         MEDIAMTX_HOST: admin-mediamtx
