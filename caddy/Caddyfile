@@ -1,5 +1,5 @@
 {
-	acme_dns linode {$LINODE_APIKEY}
+	acme_dns linode {$LINODE_APIKEY:"invalid_key"}
 }
 mtx.trandat.icu, http://mtx.localhost {
 	@whiep path */whip */whip/* */whep */whep/*

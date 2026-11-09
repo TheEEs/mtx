@@ -34,13 +34,43 @@ en:
   activerecord:
     models:
       room: "Broadcast Channel"
+      user: "User"
+      session: "Session"
     attributes:
       room:
+        id: "Channel ID"
         name: "Channel Name"
         owner: "Broadcaster"
         description: "Description"
         valid_from: "Start Time"
         valid_to: "End Time"
+        timezone: "Time Zone"
+        stream_id: "Stream ID"
+        blocked: "Blocked Status"
+        user: "Creator"
+        user_id: "Creator"
+        created_at: "Created At"
+        updated_at: "Updated At"
+      user:
+        id: "User ID"
+        email_address: "Email Address"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
+        password_challenge: "Current Password"
+        password_digest: "Password Digest"
+        confirmed_at: "Confirmed At"
+        sessions: "Sessions"
+        rooms: "Broadcast Channels"
+        created_at: "Created At"
+        updated_at: "Updated At"
+      session:
+        id: "Session ID"
+        user: "User"
+        user_id: "User"
+        ip_address: "IP Address"
+        user_agent: "User Agent"
+        created_at: "Created At"
+        updated_at: "Updated At"
     errors:
       template:
         header:

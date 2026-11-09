@@ -6,7 +6,7 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def show?
-    owner?
+    user.present?
   end
 
   def create?

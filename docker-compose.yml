@@ -11,6 +11,9 @@ services:
       - mtx
     volumes:
       - ./mediamtx/mediamtx.yml:/mediamtx.yml:ro
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
 
   caddy:
     build: 
@@ -27,8 +30,6 @@ services:
       - caddy_config:/config
     networks:
       - mtx
-    env_file:
-      - caddy/.env
 
   app:
     extends:

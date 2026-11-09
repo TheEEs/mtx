@@ -33,14 +33,44 @@ vi:
     back: Quay lại
   activerecord:
     models:
-      room: Kênh phát sóng
+      room: "Kênh phát sóng"
+      user: "Người dùng"
+      session: "Phiên đăng nhập"
     attributes:
       room:
-        name: Tên kênh
-        owner: Đơn vị phát sóng
-        description: Mô tả
-        valid_from: Thời điểm bắt đầu
-        valid_to: Thời điểm kết thúc
+        id: "Mã kênh"
+        name: "Tên kênh"
+        owner: "Đơn vị phát sóng"
+        description: "Mô tả"
+        valid_from: "Thời điểm bắt đầu"
+        valid_to: "Thời điểm kết thúc"
+        timezone: "Múi giờ"
+        stream_id: "Mã luồng phát sóng"
+        blocked: "Trạng thái khóa"
+        user: "Người tạo"
+        user_id: "Người tạo"
+        created_at: "Thời điểm tạo"
+        updated_at: "Thời điểm cập nhật"
+      user:
+        id: "Mã người dùng"
+        email_address: "Địa chỉ email"
+        password: "Mật khẩu"
+        password_confirmation: "Xác nhận mật khẩu"
+        password_challenge: "Mật khẩu hiện tại"
+        password_digest: "Mật khẩu mã hóa"
+        confirmed_at: "Thời điểm xác nhận email"
+        sessions: "Các phiên đăng nhập"
+        rooms: "Các kênh phát sóng"
+        created_at: "Thời điểm tạo"
+        updated_at: "Thời điểm cập nhật"
+      session:
+        id: "Mã phiên"
+        user: "Người dùng"
+        user_id: "Người dùng"
+        ip_address: "Địa chỉ IP"
+        user_agent: "Thiết bị / Trình duyệt"
+        created_at: "Thời điểm tạo"
+        updated_at: "Thời điểm cập nhật"
     errors:
       messages:
         record_invalid: 'Có các lỗi sau: %{errors}'
@@ -131,7 +161,7 @@ vi:
     messages:
       accepted: phải được đồng ý
       blank: không thể để trắng
-      confirmation: không khớp với xác nhận
+      confirmation: không khớp
       empty: không thể rỗng
       equal_to: phải bằng %{count}
       even: phải là số chẵn
