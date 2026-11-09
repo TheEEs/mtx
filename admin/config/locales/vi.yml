@@ -273,7 +273,7 @@ vi:
     title: "Trang chủ"
     badge: "WebRTC Low Latency"
     hero_title: "Nền tảng phát sóng trực tuyến"
-    hero_desc: "Truyền phát luồng video độ trễ thấp thông qua giao thức WHEP và WHIP. Tối giản, tập trung vào hiệu năng và độ ổn định."
+    hero_desc: "Truyền phát luồng video độ trễ thấp thông qua giao thức WEBRTC. Tối giản, tập trung vào hiệu năng và độ ổn định."
     explore_btn: "Khám phá kênh"
     create_btn: "Tạo kênh phát sóng"
     channels_heading: "Kênh phát sóng"

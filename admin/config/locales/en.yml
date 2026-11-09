@@ -109,7 +109,7 @@ en:
     title: "Home"
     badge: "WebRTC Low Latency"
     hero_title: "Live Streaming Platform"
-    hero_desc: "Ultra-low-latency video streaming powered by WHEP and WHIP protocols. Minimalist, focused on performance and reliability."
+    hero_desc: "Ultra-low-latency video streaming powered by WEBRTC protocols. Minimalist, focused on performance and reliability."
     explore_btn: "Explore Channels"
     create_btn: "Create Channel"
     channels_heading: "Broadcast Channels"
