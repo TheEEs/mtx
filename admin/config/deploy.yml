@@ -63,14 +63,13 @@ accessories:
       - ../mediamtx/mediamtx.yml:/mediamtx.yml
     env:
       clear:
-        MTX_AUTHHTTPADDRESS: |
-          <%= 
+        MTX_AUTHHTTPADDRESS: <%= 
             if host = ENV.fetch("GITHUB_SHA", nil)
               "http://admin-web-#{host}/rooms/auth"
             else
               "http://app:3000/rooms/auth"
             end
-          %>
+            %>
   caddy:
     image: <%= "ghcr.io/#{ENV.fetch('GITHUB_REPOSITORY', 'owner/mtx').downcase}/caddy:latest" %>
     host: <%= ENV.fetch("SERVER_IP", "127.0.0.1") %>
