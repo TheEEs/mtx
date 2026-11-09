@@ -54,8 +54,8 @@ accessories:
     host: <%= ENV.fetch("SERVER_IP", "127.0.0.1") %>
     options:
       publish:
-        - "8890:8890/udp"
         - "8189:8189/udp"
+        #- "8890:8890/udp"
         #- "8554:8554"
         #- "1935:1935"
         #- "8889:8889"
@@ -63,6 +63,7 @@ accessories:
       - ../mediamtx/mediamtx.yml:/mediamtx.yml
     env:
       clear:
+        MTX_WEBRTCADDITIONALHOSTS: <%= ENV.fetch("SERVER_IP", "127.0.0.1") %>
         MTX_AUTHHTTPADDRESS: <%= 
             if host = ENV.fetch("GITHUB_SHA", nil)
               "http://admin-web-#{host}/rooms/auth"
