@@ -23,6 +23,7 @@ registry:
 env:
   secret:
     - RAILS_MASTER_KEY
+    - RESEND_API_KEY
   clear:
     # Run the Solid Queue Supervisor inside Puma process
     SOLID_QUEUE_IN_PUMA: true
