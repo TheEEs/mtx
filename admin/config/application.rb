@@ -30,6 +30,12 @@ module Admin
     config.hosts << "example.com"
     config.hosts << /.*\.localhost/
     config.hosts << /.*\.trandat\.icu/
+    config.hosts << /admin-web-.*/
+
+    # Skip HostAuthorization for internal endpoints (health check and MediaMTX WebRTC auth webhook)
+    config.host_authorization = {
+      exclude: ->(request) { request.path.start_with?("/up", "/rooms/auth") }
+    }
 
     config.i18n.available_locales = [ :vi, :en ]
     config.i18n.default_locale = "vi"

@@ -106,4 +106,21 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
     assert_equal I18n.t("pundit.not_authorized"), flash[:alert]
   end
+
+  test "should authenticate mediamtx auth request with custom internal host header" do
+    post rooms_auth_url,
+      params: { path: @room.hashid, token: @room.jwt, id: "stream-session-123" },
+      headers: { "Host" => "admin-web-72355eaddfbaefb06618512e9b4318dad40b2b17" }
+    assert_response :success
+    assert_equal "OK", response.body
+    assert_equal "stream-session-123", @room.reload.stream_id
+  end
+
+  test "should reject mediamtx auth request with invalid token" do
+    post rooms_auth_url,
+      params: { path: @room.hashid, token: "invalid-token", id: "stream-session-123" },
+      headers: { "Host" => "admin-web-72355eaddfbaefb06618512e9b4318dad40b2b17" }
+    assert_response :unauthorized
+    assert_equal "Error", response.body
+  end
 end

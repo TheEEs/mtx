@@ -1,14 +1,7 @@
 # MTX - Lightweight WebRTC Live Streaming Platform
-
 <p align="center">
-  <a href="https://github.com/TheEEs/mtx/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/badge/CI%20Build-Passing-brightgreen?logo=github-actions&logoColor=white" alt="CI Status" />
-  </a>
-  <a href="https://github.com/TheEEs/mtx">
-    <img src="https://img.shields.io/badge/Deploy-Running-success?logo=docker&logoColor=white" alt="Deployment Status" />
-  </a>
-  <a href="https://github.com/TheEEs/mtx/releases">
-    <img src="https://img.shields.io/badge/Version-v0.2.0--alpha-blue" alt="Version" />
+  <a href="#">
+   <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/theees/mtx/ci-cd.yml?logo=github-actions&logoColor=white&label=CI%2FCD%20Pipeline">
   </a>
   <a href="https://www.ruby-lang.org">
     <img src="https://img.shields.io/badge/Ruby-3.4.10-CC342D?logo=ruby&logoColor=white" alt="Ruby Version" />
