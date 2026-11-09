@@ -7,6 +7,7 @@ one:
   valid_from: 2026-04-14 14:00:00
   valid_to: 2030-04-14 18:00:00
   user: one
+  is_public: true
 
 two:
   name: Room Two
@@ -15,3 +16,13 @@ two:
   valid_from: 2026-04-14 14:00:00
   valid_to: 2026-04-14 18:00:00
   user: two
+  is_public: true
+
+private_room:
+  name: Room Private
+  owner: two@example.com
+  description: Private room text
+  valid_from: 2026-04-14 14:00:00
+  valid_to: 2030-04-14 18:00:00
+  user: two
+  is_public: false

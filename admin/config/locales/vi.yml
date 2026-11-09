@@ -2,6 +2,7 @@
 vi:
   pundit:
     not_authorized: "Bạn không có quyền thực hiện thao tác này."
+    unauthenticated: "Vui lòng đăng nhập để truy cập kênh này."
   flash:
     rate_limited: "Vui lòng thử lại sau ít phút."
     success:
@@ -23,6 +24,7 @@ vi:
       open: "Mở luồng phát"
     copied: "Đã sao chép"
     copy: "Sao chép"
+    share: "Chia sẻ"
     show: "Hiển thị %{model} %{count}"
     edit: "Chỉnh sửa %{model}"
     new: "Tạo %{model}"
@@ -46,6 +48,7 @@ vi:
         valid_to: "Thời điểm kết thúc"
         timezone: "Múi giờ"
         stream_id: "Mã luồng phát sóng"
+        is_public: "Chế độ công khai"
         blocked: "Trạng thái khóa"
         user: "Người tạo"
         user_id: "Người tạo"
@@ -293,8 +296,11 @@ vi:
       time: "Thời gian"
       status: "Trạng thái"
       actions: "Thao tác"
+      visibility: "Quyền riêng tư"
     unlimited: "Không giới hạn"
     to: "đến"
+    public: "Công khai"
+    private: "Riêng tư"
     status_open: "Mở"
     status_blocked: "Đã khóa"
     status_expired: "Hết hạn"
@@ -311,6 +317,9 @@ vi:
     status_idle: "Chưa phát"
     status_live: "Đang phát"
     status_expired: "Đã hết hạn"
+    public_badge: "Công khai"
+    private_badge: "Riêng tư"
+    share_text: "Xem luồng phát trực tiếp %{name} trên MTX Live"
     unavailable_title: "Phòng phát sóng hiện không sẵn có"
     unavailable_desc: "Kênh phát sóng này nằm ngoài khung thời gian hoạt động hoặc phiên phát sóng đã kết thúc."
     whip_title: "Thông số kết nối phát sóng (WHIP)"
@@ -329,6 +338,8 @@ vi:
     edit_desc: "Cập nhật thông tin kênh phát sóng."
     create: "Tạo kênh"
     update: "Lưu thay đổi"
+    is_public_label: "Công khai phòng này"
+    is_public_hint: "Phòng công khai sẽ hiển thị tại trang chủ và bất kỳ ai cũng có thể xem. Bỏ chọn để giới hạn chỉ người dùng đã đăng nhập mới xem được."
   auth:
     sign_in: "Đăng nhập"
     sign_in_desc: "Đăng nhập để quản trị và phát sóng trực tuyến"

@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  allow_unauthenticated_access only: [ :auth ]
+  allow_unauthenticated_access only: [ :auth, :show ]
   skip_before_action :verify_authenticity_token, only: [ :auth ]
   before_action :set_room, only: %i[ show edit update destroy toggle_stream ]
   around_action :set_timezone, only: %i[ auth update create edit ]
@@ -113,7 +113,7 @@ class RoomsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def room_params
-      params.expect(room: [ :name, :owner, :description, :valid_from, :valid_to, :timezone ])
+      params.expect(room: [ :name, :owner, :description, :valid_from, :valid_to, :timezone, :is_public ])
     end
 
     def set_timezone

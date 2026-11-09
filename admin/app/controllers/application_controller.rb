@@ -17,8 +17,13 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:alert] = t("pundit.not_authorized", default: "You are not authorized to perform this action.")
-    redirect_back fallback_location: root_path
+    if authenticated?
+      flash[:alert] = t("pundit.not_authorized", default: "You are not authorized to perform this action.")
+      redirect_back fallback_location: root_path
+    else
+      flash[:alert] = t("pundit.unauthenticated", default: "Vui lòng đăng nhập để truy cập.")
+      request_authentication
+    end
   end
 
   def switch_locale(&action)

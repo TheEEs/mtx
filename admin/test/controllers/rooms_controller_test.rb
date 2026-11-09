@@ -6,6 +6,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
     @other_user = users(:two)
     @room = rooms(:one)
     @other_room = rooms(:two)
+    @private_room = rooms(:private_room)
     sign_in_as(@user)
   end
 
@@ -27,14 +28,42 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create room for current_user" do
+  test "should create room for current_user with is_public setting" do
     assert_difference("Room.count") do
-      post rooms_url, params: { room: { description: @room.description, name: "New Channel #{SecureRandom.hex(4)}", owner: @room.owner, valid_from: @room.valid_from, valid_to: @room.valid_to } }
+      post rooms_url, params: {
+        room: {
+          description: @room.description,
+          name: "New Channel #{SecureRandom.hex(4)}",
+          owner: @room.owner,
+          valid_from: @room.valid_from,
+          valid_to: @room.valid_to,
+          is_public: false
+        }
+      }
     end
 
     created_room = Room.last
     assert_equal @user.id, created_room.user_id
+    assert_equal false, created_room.is_public
     assert_redirected_to room_url(created_room)
+  end
+
+  test "should allow unauthenticated visitor to view public room" do
+    sign_out
+    get room_url(@room)
+    assert_response :success
+  end
+
+  test "should redirect unauthenticated visitor from private room to login" do
+    sign_out
+    get room_url(@private_room)
+    assert_redirected_to new_session_url
+    assert_equal I18n.t("pundit.unauthenticated"), flash[:alert]
+  end
+
+  test "should allow registered user to view private room created by another user" do
+    get room_url(@private_room)
+    assert_response :success
   end
 
   test "should show room with video player when active for owner" do
@@ -42,13 +71,21 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
     get room_url(@room)
     assert_response :success
     assert_select "video#playing_video", count: 1
+    # Owner should see toggle stream button and WHIP config box
+    assert_select "#toggle_stream_#{@room.hashid}_1", count: 1
+    assert_select "h2", text: I18n.t("room_show.whip_title"), count: 1
+    assert_select "button[data-controller='share']", count: 1
+    assert_select "#share_room_#{@room.hashid}", count: 1
   end
 
-  test "should not show another user's room" do
-    skip "This test is skipped because the policy was changed to allow any authenticated user to view any room."
+  test "should not show toggle stream button or whip config box to non-owner" do
+    @other_room.update!(valid_from: 1.hour.ago, valid_to: 2.hours.from_now)
     get room_url(@other_room)
-    assert_redirected_to root_url
-    assert_equal I18n.t("pundit.not_authorized"), flash[:alert]
+    assert_response :success
+    # Non-owner should NOT see toggle stream button or WHIP config box, but CAN see share button
+    assert_select "#toggle_stream_#{@other_room.hashid}_1", count: 0
+    assert_select "h2", text: I18n.t("room_show.whip_title"), count: 0
+    assert_select "button[data-controller='share']", count: 1
   end
 
   test "should show unavailable notice and no video player when room is expired" do
@@ -79,8 +116,9 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update room for owner" do
-    patch room_url(@room), params: { room: { description: @room.description, name: @room.name, owner: @room.owner, valid_from: @room.valid_from, valid_to: @room.valid_to } }
+    patch room_url(@room), params: { room: { description: @room.description, name: @room.name, owner: @room.owner, valid_from: @room.valid_from, valid_to: @room.valid_to, is_public: false } }
     assert_redirected_to room_url(@room)
+    assert_equal false, @room.reload.is_public
   end
 
   test "should not update other user's room" do

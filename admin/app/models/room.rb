@@ -6,6 +6,9 @@ class Room < ApplicationRecord
     validate :valid_from_must_be_less_than_valid_to
     validates :stream_id, uniqueness: true, unless: -> { stream_id.blank? }
 
+    scope :public_rooms, -> { where(is_public: true) }
+    scope :private_rooms, -> { where(is_public: false) }
+
     def expired?
         valid_to.present? && Time.current > valid_to
     end

@@ -2,6 +2,7 @@
 en:
   pundit:
     not_authorized: "You are not authorized to perform this action."
+    unauthenticated: "Please sign in to access this channel."
   flash:
     rate_limited: "Try again later."
     success:
@@ -23,6 +24,7 @@ en:
       open: "Open stream"
     copied: "Copied"
     copy: "Copy"
+    share: "Share"
     show: "Show %{model} %{count}"
     edit: "Edit %{model}"
     new: "New %{model}"
@@ -46,6 +48,7 @@ en:
         valid_to: "End Time"
         timezone: "Time Zone"
         stream_id: "Stream ID"
+        is_public: "Public Room"
         blocked: "Blocked Status"
         user: "Creator"
         user_id: "Creator"
@@ -129,8 +132,11 @@ en:
       time: "Schedule"
       status: "Status"
       actions: "Actions"
+      visibility: "Visibility"
     unlimited: "Unlimited"
     to: "to"
+    public: "Public"
+    private: "Private"
     status_open: "Open"
     status_blocked: "Blocked"
     status_expired: "Expired"
@@ -147,6 +153,9 @@ en:
     status_idle: "Offline"
     status_live: "Live"
     status_expired: "Expired"
+    public_badge: "Public"
+    private_badge: "Private"
+    share_text: "Watch live stream %{name} on MTX Live"
     unavailable_title: "This channel is currently unavailable"
     unavailable_desc: "This channel is outside its active time window or its broadcast has ended."
     whip_title: "Stream Ingestion Parameters (WHIP)"
@@ -165,6 +174,8 @@ en:
     edit_desc: "Update broadcast channel information."
     create: "Create Channel"
     update: "Save Changes"
+    is_public_label: "Make this room public"
+    is_public_hint: "Public rooms are listed on the homepage and can be viewed by anyone. Uncheck to restrict access to registered users only."
   auth:
     sign_in: "Sign In"
     sign_in_desc: "Sign in to manage and broadcast streams"

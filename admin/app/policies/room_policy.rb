@@ -6,7 +6,7 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present?
+    record.is_public? || user.present?
   end
 
   def create?

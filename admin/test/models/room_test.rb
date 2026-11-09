@@ -36,4 +36,12 @@ class RoomTest < ActiveSupport::TestCase
     assert room.not_started?
     assert_not room.available?
   end
+
+  test "scopes filter public and private rooms" do
+    assert_includes Room.public_rooms, rooms(:one)
+    assert_not_includes Room.public_rooms, rooms(:private_room)
+
+    assert_includes Room.private_rooms, rooms(:private_room)
+    assert_not_includes Room.private_rooms, rooms(:one)
+  end
 end

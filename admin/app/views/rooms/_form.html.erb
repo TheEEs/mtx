@@ -56,6 +56,18 @@
 
   <%= form.hidden_field :timezone, data: { controller: "timezone" } %>
 
+  <div class="rounded-lg border border-base-200/80 bg-base-100/40 p-4">
+    <div class="flex items-start justify-between gap-4">
+      <div class="space-y-0.5">
+        <%= form.label :is_public, t("room_form.is_public_label"), class: "text-sm font-medium text-base-content cursor-pointer" %>
+        <p class="text-xs text-base-content/60 leading-relaxed">
+          <%= t("room_form.is_public_hint") %>
+        </p>
+      </div>
+      <%= form.check_box :is_public, class: "toggle toggle-primary toggle-sm sm:toggle-md mt-0.5 cursor-pointer" %>
+    </div>
+  </div>
+
   <div class="pt-4 flex items-center gap-3">
     <%= form.submit (room.persisted? ? t("room_form.update") : t("room_form.create")), class: "btn btn-sm btn-primary rounded-md px-6 font-medium cursor-pointer" %>
     <%= link_to t("actions.back"), rooms_path, class: "btn btn-sm btn-ghost rounded-md text-xs text-base-content/60 hover:text-base-content" %>
