@@ -138,6 +138,12 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h2", text: I18n.t("room_show.whip_title"), count: 1
     assert_select "button[data-controller='share']", count: 1
     assert_select "#share_room_#{@room.hashid}", count: 1
+    # Owner should see screen share controls and modal
+    assert_select "#screen_share_btn", count: 1
+    assert_select "dialog[data-screen-share-target='modal']", count: 1
+    assert_select "select[data-screen-share-target='videoCodecSelect']", count: 1
+    assert_select "select[data-screen-share-target='audioCodecSelect']", count: 1
+    assert_select "div[data-screen-share-target='unsupportedView']", count: 1
   end
 
   test "should not show toggle stream button or whip config box to non-owner" do
@@ -148,6 +154,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#toggle_stream_#{@other_room.hashid}_1", count: 0
     assert_select "h2", text: I18n.t("room_show.whip_title"), count: 0
     assert_select "button[data-controller='share']", count: 1
+    assert_select "#screen_share_btn", count: 0
   end
 
   test "should show unavailable notice and no video player when room is expired" do

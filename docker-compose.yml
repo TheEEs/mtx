@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile.mediamtx
     restart: unless-stopped
     ports:
-      - 8890:8890/udp
+      - 8889:8889 #for local development only
       - 8189:8189/udp
     networks:
       - mtx
@@ -14,6 +14,8 @@ services:
     dns:
       - 8.8.8.8
       - 8.8.4.4
+    environment:
+      - MTX_WEBRTCADDITIONALHOSTS=localhost
 
   caddy:
     build: 
