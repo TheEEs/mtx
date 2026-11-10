@@ -36,6 +36,8 @@ services:
       file: "./admin/.devcontainer/compose.yaml"
       service: app
     restart: unless-stopped
+    environment:
+      - MTX_LOCAL_HOST=mtx.localhost
 
 volumes:
   caddy_data:
