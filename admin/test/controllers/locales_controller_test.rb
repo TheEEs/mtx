@@ -38,7 +38,7 @@ class LocalesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not switch to unsupported locale" do
-    old_locale = session[:locale]
+    old_locale = I18n.default_locale
     post set_locale_url(:fr)
     assert_redirected_to root_url
     assert_equal old_locale, session[:locale]
