@@ -1,0 +1,58 @@
+<% content_for(:title, "#{@room.name} - #{t('rooms.private_room')}") %>
+
+<div class="max-w-md mx-auto py-8">
+  <div class="rounded-xl border border-base-200/80 bg-base-100/60 p-6 sm:p-8 space-y-6">
+    <!-- Icon & Header -->
+    <div class="text-center space-y-3">
+      <div class="w-12 h-12 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center mx-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+      </div>
+
+      <div class="space-y-1">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-500/10 text-amber-500">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+          <%= t("rooms.private_room") %>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-base-content line-clamp-1">
+          <%= @room.name %>
+        </h1>
+        <p class="text-xs text-base-content/60">
+          <%= t("rooms.unlock_prompt") %>
+        </p>
+      </div>
+    </div>
+
+    <!-- Alert / Errors -->
+    <% if alert.present? %>
+      <div class="flex items-center gap-2 p-3 rounded-lg border border-error/30 bg-error/10 text-error text-xs font-medium">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <span><%= alert %></span>
+      </div>
+    <% end %>
+
+    <!-- Password Form -->
+    <%= form_with url: unlock_room_path(@room), method: :post, class: "space-y-4" do |f| %>
+      <div class="space-y-1.5">
+        <label for="password" class="text-xs font-medium text-base-content/80">
+          <%= Room.human_attribute_name(:password) %> <span class="text-error">*</span>
+        </label>
+        <%= f.password_field :password,
+              id: "password",
+              required: true,
+              autofocus: true,
+              autocomplete: "current-password",
+              placeholder: t("rooms.enter_password"),
+              class: "input input-bordered w-full rounded-md text-sm bg-base-100/70" %>
+      </div>
+
+      <div class="pt-2 space-y-2">
+        <%= f.submit t("rooms.unlock_button"), class: "btn btn-primary w-full rounded-md font-medium text-sm cursor-pointer" %>
+        <%= link_to t("actions.back"), root_path, class: "btn btn-ghost btn-sm w-full rounded-md text-xs text-base-content/60 hover:text-base-content" %>
+      </div>
+    <% end %>
+  </div>
+</div>

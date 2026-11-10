@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   root "home#index"
   get "home/index"
-  resources :rooms
+  resources :rooms do
+    post :unlock, on: :member
+  end
   post "rooms/auth", to: "rooms#auth"
   delete "rooms/:id/stream", to: "rooms#toggle_stream", as: :toggle_stream
   post "locale/:locale", to: "locales#update", as: :set_locale

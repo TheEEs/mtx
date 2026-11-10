@@ -56,7 +56,7 @@
 
   <%= form.hidden_field :timezone, data: { controller: "timezone" } %>
 
-  <div class="rounded-lg border border-base-200/80 bg-base-100/40 p-4">
+  <div class="rounded-lg border border-base-200/80 bg-base-100/40 p-4 space-y-4" data-controller="room-form">
     <div class="flex items-start justify-between gap-4">
       <div class="space-y-0.5">
         <%= form.label :is_public, t("room_form.is_public_label"), class: "text-sm font-medium text-base-content cursor-pointer" %>
@@ -64,7 +64,38 @@
           <%= t("room_form.is_public_hint") %>
         </p>
       </div>
-      <%= form.check_box :is_public, class: "toggle toggle-primary toggle-sm sm:toggle-md mt-0.5 cursor-pointer" %>
+      <%= form.check_box :is_public, 
+            id: "room_is_public",
+            class: "toggle toggle-primary toggle-sm sm:toggle-md mt-0.5 cursor-pointer",
+            data: { 
+              room_form_target: "isPublic",
+              action: "change->room-form#togglePassword" 
+            } %>
+    </div>
+
+    <!-- Password input: only active when room_is_public toggle is off -->
+    <div data-room-form-target="passwordContainer" class="pt-3 border-t border-base-200/60 space-y-1.5 <%= 'hidden' if room.is_public? %>">
+      <%= form.label :password, class: "text-xs font-medium text-base-content/80 flex items-center justify-between" do %>
+        <span class="inline-flex items-center gap-1.5">
+          <%= Room.human_attribute_name(:password) %>
+          <span class="text-[11px] font-normal text-base-content/50">(<%= t("room_form.optional") %>)</span>
+        </span>
+        <% if room.persisted? && room.password_digest.present? %>
+          <span class="text-[11px] text-base-content/50 font-normal">
+            <%= t("room_form.password_keep_blank_hint") %>
+          </span>
+        <% end %>
+      <% end %>
+      <%= form.password_field :password,
+            id: "room_password",
+            placeholder: t("room_form.password_placeholder"),
+            autocomplete: "new-password",
+            class: "input input-bordered w-full rounded-md text-sm bg-base-100/60 #{'input-error' if room.errors[:password].any?}",
+            disabled: room.is_public?,
+            data: { room_form_target: "passwordInput" } %>
+      <p class="text-[11px] text-base-content/60">
+        <%= t("room_form.password_hint") %>
+      </p>
     </div>
   </div>
 

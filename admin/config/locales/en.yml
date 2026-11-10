@@ -13,6 +13,10 @@ en:
       created: "Failed to create %{model}"
       updated: "Failed to update %{model}"
       deleted: "Failed to delete %{model}"
+    password:
+      reset_sent: "Password reset instructions have been sent to your email."
+      reset_success: "Your password has been reset successfully. You can now sign in with your new password."
+      reset_failed: "Failed to reset password. Please check the link or try again."
   actions:
     session:
       new: "Sign In"
@@ -49,6 +53,7 @@ en:
         timezone: "Time Zone"
         stream_id: "Stream ID"
         is_public: "Public Room"
+        password: "Room Password"
         blocked: "Blocked Status"
         user: "Creator"
         user_id: "Creator"
@@ -116,7 +121,7 @@ en:
     explore_btn: "Explore Channels"
     create_btn: "Create Channel"
     channels_heading: "Broadcast Channels"
-    channels_subheading: "Live streams currently active on the platform."
+    channels_subheading: "Recently created live streams."
     view_all: "View all (%{count})"
     ready: "Ready"
     blocked: "Blocked"
@@ -166,6 +171,15 @@ en:
     whip_closed_title: "Broadcast Ingestion Closed"
     whip_closed_desc: "This channel has ended its active period. New streams cannot be published."
 
+  rooms:
+    private_room: "Private Room"
+    private_badge: "Private"
+    unlock_prompt: "This broadcast room is password-protected. Please enter the password to join."
+    enter_password: "Enter room password..."
+    unlock_button: "Unlock Room"
+    unlock_success: "Room unlocked successfully!"
+    invalid_password: "Incorrect room password. Please try again."
+    private_login_required: "Please sign in to view this private room."
   room_form:
     name_placeholder: "Enter channel name..."
     owner_placeholder: "Broadcaster or streamer name..."
@@ -175,7 +189,11 @@ en:
     create: "Create Channel"
     update: "Save Changes"
     is_public_label: "Make this room public"
-    is_public_hint: "Public rooms are listed on the homepage and can be viewed by anyone. Uncheck to restrict access to registered users only."
+    is_public_hint: "Public rooms can be watched by anyone. Turn off to make the room private (requires sign in)."
+    password_placeholder: "Enter password for private room (optional)..."
+    password_hint: "Optional. If set, viewers will need to enter this password to access the private room."
+    password_keep_blank_hint: "(Leave blank to keep existing password or no password)"
+    optional: "Optional"
   auth:
     sign_in: "Sign In"
     sign_in_desc: "Sign in to manage and broadcast streams"

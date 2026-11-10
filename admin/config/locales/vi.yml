@@ -13,6 +13,10 @@ vi:
       created: "Tạo %{model} thất bại"
       updated: "Cập nhật %{model} thất bại"
       deleted: "Xóa %{model} thất bại"
+    password:
+      reset_sent: "Hướng dẫn đặt lại mật khẩu đã được gửi đến email của bạn."
+      reset_success: "Mật khẩu của bạn đã được đặt lại thành công. Bạn có thể đăng nhập với mật khẩu mới."
+      reset_failed: "Không thể đặt lại mật khẩu. Vui lòng kiểm tra liên kết hoặc thử lại."
   actions:
     session:
       new: Đăng nhập
@@ -49,6 +53,7 @@ vi:
         timezone: "Múi giờ"
         stream_id: "Mã luồng phát sóng"
         is_public: "Chế độ công khai"
+        password: "Mật khẩu phòng"
         blocked: "Trạng thái khóa"
         user: "Người tạo"
         user_id: "Người tạo"
@@ -280,7 +285,7 @@ vi:
     explore_btn: "Khám phá kênh"
     create_btn: "Tạo kênh phát sóng"
     channels_heading: "Kênh phát sóng"
-    channels_subheading: "Danh sách các luồng phát đang hoạt động trên hệ thống."
+    channels_subheading: "Các luồng phát được tạo gần đây."
     view_all: "Xem tất cả (%{count})"
     ready: "Sẵn sàng"
     blocked: "Đã khóa"
@@ -330,6 +335,15 @@ vi:
     whip_closed_title: "Cổng kết nối phát sóng đã đóng"
     whip_closed_desc: "Kênh đã kết thúc thời gian hoạt động. Không thể đẩy thêm luồng phát mới qua WHIP."
 
+  rooms:
+    private_room: "Phòng riêng tư"
+    private_badge: "Riêng tư"
+    unlock_prompt: "Phòng phát sóng này được bảo vệ bằng mật khẩu. Vui lòng nhập mật khẩu để tham gia."
+    enter_password: "Nhập mật khẩu phòng..."
+    unlock_button: "Mở khóa phòng"
+    unlock_success: "Mở khóa phòng thành công!"
+    invalid_password: "Mật khẩu phòng không chính xác. Vui lòng thử lại."
+    private_login_required: "Vui lòng đăng nhập để xem phòng riêng tư này."
   room_form:
     name_placeholder: "Nhập tên kênh..."
     owner_placeholder: "Tên người hoặc đơn vị phát sóng..."
@@ -339,7 +353,11 @@ vi:
     create: "Tạo kênh"
     update: "Lưu thay đổi"
     is_public_label: "Công khai phòng này"
-    is_public_hint: "Phòng công khai sẽ hiển thị tại trang chủ và bất kỳ ai cũng có thể xem. Bỏ chọn để giới hạn chỉ người dùng đã đăng nhập mới xem được."
+    is_public_hint: "Phòng công khai cho phép mọi người đều có thể xem. Tắt để đặt phòng ở chế độ riêng tư (yêu cầu đăng nhập)."
+    password_placeholder: "Nhập mật khẩu cho phòng riêng tư (tùy chọn)..."
+    password_hint: "Không bắt buộc. Nếu đặt mật khẩu, người xem cần nhập đúng mật khẩu này để truy cập phòng."
+    password_keep_blank_hint: "(Để trống nếu không đổi hoặc không đặt mật khẩu)"
+    optional: "Tùy chọn"
   auth:
     sign_in: "Đăng nhập"
     sign_in_desc: "Đăng nhập để quản trị và phát sóng trực tuyến"
