@@ -42,22 +42,22 @@
         </button>
 
         <!-- Language Switcher -->
-        <div class="flex items-center text-[11px] font-semibold border border-base-content/15 rounded-md overflow-hidden">
+        <div class="flex items-center text-[11px] font-semibold border border-base-content/15 rounded-md overflow-hidden shrink-0">
           <%= button_to "VI", set_locale_path(:vi), method: :post, data: { turbo_action: "replace" }, class: "px-2 py-1 transition cursor-pointer #{I18n.locale == :vi ? 'bg-base-content text-base-100 font-bold' : 'text-base-content/60 hover:text-base-content'}", title: "Tiếng Việt" %>
           <%= button_to "EN", set_locale_path(:en), method: :post, data: { turbo_action: "replace" }, class: "px-2 py-1 transition cursor-pointer #{I18n.locale == :en ? 'bg-base-content text-base-100 font-bold' : 'text-base-content/60 hover:text-base-content'}", title: "English" %>
         </div>
 
         <% if authenticated? %>
-          <%= link_to new_room_path, class: "hidden sm:inline-flex items-center gap-1.5 btn btn-sm btn-ghost border border-base-content/15 rounded-md text-xs font-medium" do %>
+          <%= link_to new_room_path, class: "hidden sm:inline-flex items-center gap-1.5 btn btn-sm btn-ghost border border-base-content/15 rounded-md text-xs font-medium shrink-0" do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
             </svg>
             <%= t("nav.new_room") %>
           <% end %>
-          <%= button_to t("actions.session.delete"), session_path, method: :delete, class: "btn btn-sm btn-ghost rounded-md text-xs text-base-content/70 hover:text-base-content cursor-pointer" %>
+          <%= button_to t("actions.session.delete"), session_path, method: :delete, class: "hidden sm:inline-flex btn btn-sm btn-ghost rounded-md text-xs text-base-content/70 hover:text-base-content cursor-pointer shrink-0" %>
         <% else %>
-          <%= link_to t("actions.registration.new"), new_registration_path, class: "btn btn-sm btn-primary rounded-md text-xs font-medium" %>
-          <%= link_to t("actions.session.new"), new_session_path, class: "btn btn-sm btn-ghost border border-base-content/15 rounded-md text-xs font-medium" %>
+          <%= link_to t("actions.registration.new"), new_registration_path, class: "hidden sm:inline-flex btn btn-sm btn-primary rounded-md text-xs font-medium shrink-0" %>
+          <%= link_to t("actions.session.new"), new_session_path, class: "hidden sm:inline-flex btn btn-sm btn-ghost border border-base-content/15 rounded-md text-xs font-medium shrink-0" %>
         <% end %>
 
         <!-- Mobile Menu Dropdown -->

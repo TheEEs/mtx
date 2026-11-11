@@ -66,7 +66,7 @@
       </div>
       <%= form.check_box :is_public, 
             id: "room_is_public",
-            class: "toggle toggle-primary toggle-sm sm:toggle-md mt-0.5 cursor-pointer",
+            class: "toggle toggle-primary toggle-sm sm:toggle-md mt-0.5 cursor-pointer shrink-0",
             data: { 
               room_form_target: "isPublic",
               action: "change->room-form#togglePassword" 
@@ -75,7 +75,7 @@
 
     <!-- Password input: only active when room_is_public toggle is off -->
     <div data-room-form-target="passwordContainer" class="pt-3 border-t border-base-200/60 space-y-1.5 <%= 'hidden' if room.is_public? %>">
-      <%= form.label :password, class: "text-xs font-medium text-base-content/80 flex items-center justify-between" do %>
+      <%= form.label :password, class: "text-xs font-medium text-base-content/80 flex flex-wrap items-center justify-between gap-1" do %>
         <span class="inline-flex items-center gap-1.5">
           <%= Room.human_attribute_name(:password) %>
           <span class="text-[11px] font-normal text-base-content/50">(<%= t("room_form.optional") %>)</span>

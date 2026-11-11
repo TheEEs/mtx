@@ -24,8 +24,8 @@ vi:
     registration:
       new: Đăng ký
     stream:
-      kick: "Khóa luồng phát"
-      open: "Mở luồng phát"
+      kick: "Khóa luồng"
+      open: "Mở luồng"
     copied: "Đã sao chép"
     copy: "Sao chép"
     share: "Chia sẻ"
@@ -311,7 +311,7 @@ vi:
     status_open: "Mở"
     status_blocked: "Đã khóa"
     status_expired: "Hết hạn"
-    status_not_started: "Sẽ phát trong tương lai"
+    status_not_started: "Sắp diễn ra"
     confirm_delete: "Bạn có chắc chắn muốn xóa kênh này?"
     empty: "Chưa có kênh nào được tạo"
     view_channel: "Xem kênh"
@@ -327,7 +327,7 @@ vi:
     public_badge: "Công khai"
     private_badge: "Riêng tư"
     share_text: "Xem luồng phát trực tiếp %{name} trên MTX Live"
-    unavailable_title: "Phòng phát sóng hiện không sẵn có"
+    unavailable_title: "Phòng hiện không sẵn có"
     unavailable_desc: "Kênh phát sóng này nằm ngoài khung thời gian hoạt động hoặc phiên phát sóng đã kết thúc."
     whip_title: "Thông số kết nối phát sóng (WHIP)"
     whip_desc: "Nhập URL và Token vào OBS Studio, FFmpeg hoặc bộ mã hóa video để truyền luồng trực tiếp."
@@ -340,10 +340,10 @@ vi:
   screen_share:
     button: "Chia sẻ màn hình"
     stop: "Dừng phát"
-    streaming_now: "Đang phát trực tiếp màn hình"
+    streaming_now: "Đang phát màn hình"
     connected: "Đã kết nối luồng"
     connecting: "Đang kết nối..."
-    box_title: "Phát trực tiếp từ màn hình trình duyệt"
+    box_title: "Phát trực tiếp từ màn hình"
     box_desc: "Chia sẻ trực tiếp toàn bộ màn hình hoặc cửa sổ ứng dụng đến luồng phát hiện tại mà không cần cài đặt OBS."
     config_title: "Cấu hình chia sẻ màn hình"
     config_desc: "Chọn các định dạng codec video và âm thanh mà trình duyệt của bạn hỗ trợ trước khi phát sóng."

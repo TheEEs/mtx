@@ -33,16 +33,16 @@
 
   <!-- Live Channels Section -->
   <section class="space-y-6">
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1">
       <div>
         <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-base-content">
           <%= t("home.channels_heading") %>
         </h2>
-        <p class="text-sm text-base-content/60 mt-0.5">
+        <p class="text-xs sm:text-sm text-base-content/60 mt-0.5">
           <%= t("home.channels_subheading") %>
         </p>
       </div>
-      <%= link_to rooms_path, class: "text-sm text-base-content/70 hover:text-base-content font-medium transition flex items-center gap-1" do %>
+      <%= link_to rooms_path, class: "text-xs sm:text-sm text-base-content/70 hover:text-base-content font-medium transition flex items-center gap-1 shrink-0 self-start sm:self-auto" do %>
         <%= t("home.view_all", count: @rooms.size) %>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -51,16 +51,16 @@
     </div>
 
     <% if @rooms.any? %>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         <% @rooms.each do |room| %>
-          <div class="group flex flex-col justify-between rounded-xl border border-base-200/80 bg-base-100/60 p-5 transition hover:border-base-content/20 hover:bg-base-100">
+          <div class="group flex flex-col justify-between rounded-xl border border-base-200/80 bg-base-100/60 p-4 sm:p-5 transition hover:border-base-content/20 hover:bg-base-100">
             <div class="space-y-3">
               <!-- Channel Status & Owner -->
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-xs font-medium text-base-content/60 truncate">
+              <div class="flex items-center justify-between gap-2 min-w-0">
+                <span class="text-xs font-medium text-base-content/60 truncate min-w-0 flex-1" title="<%= room.owner %>">
                   <%= room.owner.presence || "MTX Streamer" %>
                 </span>
-                <div class="flex items-center gap-1.5">
+                <div class="flex items-center gap-1.5 shrink-0">
                   <% unless room.is_public? %>
                     <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-medium bg-amber-500/10 text-amber-500">
                       <% if room.password_protected? %>
@@ -91,14 +91,14 @@
               <!-- Channel Title -->
               <div>
                 <% if policy(room).show? %>
-                  <%= link_to room_path(room), class: "font-semibold text-lg text-base-content group-hover:text-primary transition line-clamp-1" do %>
+                  <%= link_to room_path(room), class: "font-semibold text-base sm:text-lg text-base-content group-hover:text-primary transition line-clamp-1 break-words" do %>
                     <%= room.name %>
                   <% end %>
                 <% else %>
-                  <span class="font-semibold text-lg text-base-content line-clamp-1"><%= room.name %></span>
+                  <span class="font-semibold text-base sm:text-lg text-base-content line-clamp-1 break-words"><%= room.name %></span>
                 <% end %>
                 <% if room.description.present? %>
-                  <p class="text-xs text-base-content/60 mt-1 line-clamp-2 leading-relaxed">
+                  <p class="text-xs text-base-content/60 mt-1 line-clamp-2 leading-relaxed break-words">
                     <%= room.description %>
                   </p>
                 <% end %>
@@ -106,12 +106,12 @@
             </div>
 
             <!-- Card Footer -->
-            <div class="mt-5 pt-4 border-t border-base-200/60 flex items-center justify-between text-xs text-base-content/50">
-              <span>
+            <div class="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-base-200/60 flex items-center justify-between text-xs text-base-content/50 gap-2">
+              <span class="truncate min-w-0">
                 <%= local_time(room.created_at, :short) if room.created_at %>
               </span>
               <% if policy(room).show? %>
-                <%= link_to room_path(room), class: "inline-flex items-center gap-1 font-medium text-base-content/80 group-hover:text-base-content transition" do %>
+                <%= link_to room_path(room), class: "inline-flex items-center gap-1 font-medium text-base-content/80 group-hover:text-base-content transition shrink-0" do %>
                   <%= t("home.watch_stream") %>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 transition group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
