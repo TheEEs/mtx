@@ -1,7 +1,11 @@
 # MTX - Lightweight WebRTC Live Streaming Platform
+
 <p align="center">
-  <a href="#">
-   <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/theees/mtx/ci-cd.yml?logo=github-actions&logoColor=white&label=CI%2FCD%20Pipeline">
+  <a href="https://github.com/theees/mtx/actions">
+    <img alt="CI/CD Pipeline" src="https://img.shields.io/github/actions/workflow/status/theees/mtx/ci-cd.yml?logo=github-actions&logoColor=white&label=CI%2FCD%20Pipeline" />
+  </a>
+  <a href="https://github.com/theees/mtx/releases">
+    <img src="https://img.shields.io/badge/Version-v0.2.1--alpha-blue" alt="Version" />
   </a>
   <a href="https://www.ruby-lang.org">
     <img src="https://img.shields.io/badge/Ruby-3.4.10-CC342D?logo=ruby&logoColor=white" alt="Ruby Version" />
@@ -12,50 +16,57 @@
   <a href="https://github.com/bluenviron/mediamtx">
     <img src="https://img.shields.io/badge/MediaMTX-v1.17.1-00ADD8?logo=webrtc&logoColor=white" alt="MediaMTX Version" />
   </a>
-  <a href="#license">
+  <a href="#giấy-phép--license">
     <img src="https://img.shields.io/badge/License-MIT-informational" alt="License" />
   </a>
 </p>
 
 <p align="center">
-  <strong><a href="#ti%E1%BA%BFng-vi%E1%BB%87t">🇻🇳 Tiếng Việt</a></strong> | 
-  <strong><a href="#english">🇬🇧 English</a></strong>
+  <strong><a href="#-tiếng-việt">🇻🇳 Tiếng Việt</a></strong> | 
+  <strong><a href="#-english">🇬🇧 English</a></strong>
 </p>
 
 ---
 
-## Tiếng Việt
+## 🇻🇳 Tiếng Việt
 
 ### 1. Giới thiệu dự án
 
-**MTX** là một dự án mã nguồn mở nhỏ gọn, được xây dựng nhằm cung cấp giải pháp phát sóng trực tiếp (live streaming) độ trễ thấp tự lưu trữ (self-hosted). Dự án kết hợp máy chủ truyền thông [MediaMTX](https://github.com/bluenviron/mediamtx) hỗ trợ giao thức WebRTC hiện đại, máy chủ proxy an toàn [Caddy](https://caddyserver.com/) và ứng dụng quản lý kênh phát sóng bằng [Ruby on Rails 8](https://rubyonrails.org/).
+**MTX** là một dự án mã nguồn mở nhỏ gọn, cung cấp giải pháp phát sóng trực tiếp (live streaming) độ trễ cực thấp (sub-second latency) theo mô hình tự lưu trữ (self-hosted). Dự án kết hợp:
+- **[MediaMTX](https://github.com/bluenviron/mediamtx)**: Máy chủ truyền thông hiệu năng cao hỗ trợ giao thức WebRTC (WHIP / WHEP).
+- **[Caddy](https://caddyserver.com/)**: Reverse proxy tự động quản lý SSL/TLS và điều hướng lưu lượng video/web.
+- **[Ruby on Rails 8](https://rubyonrails.org/)**: Ứng dụng quản trị kênh phát sóng, phân quyền người dùng và quản lý phiên phát sóng.
 
-Dự án này ban đầu được phát triển với mục đích học tập, thử nghiệm các công nghệ truyền phát video độ trễ thấp trong trình duyệt và phục vụ nhu cầu phát trực tiếp nội bộ hoặc quy mô vừa và nhỏ. Dự án không hướng tới việc thay thế các nền tảng thương mại quy mô lớn, mà tập trung vào sự đơn giản, dễ cài đặt và dễ bảo trì.
+Dự án được xây dựng với tinh thần học hỏi, thử nghiệm công nghệ WebRTC hiện đại và phục vụ các nhu cầu phát sóng nội bộ hoặc quy mô vừa và nhỏ. Hệ thống tập trung vào tính tinh gọn, bảo mật, dễ thiết lập và bảo trì.
 
 ---
 
 ### 2. Mục đích dự án
 
-- **Đơn giản hóa việc tự lưu trữ WebRTC**: Giúp cá nhân và nhóm nhỏ dễ dàng dựng máy chủ phát sóng WebRTC với độ trễ chỉ dưới 1 giây mà không phụ thuộc vào hạ tầng bên thứ ba.
-- **Quản lý kênh phát sóng trực quan**: Cung cấp giao diện web tinh gọn để tạo phòng phát, đặt lịch hoạt động, kiểm soát bảo mật và tạo thông số kết nối cho phần mềm phát sóng (OBS Studio, FFmpeg,...).
-- **Trải nghiệm xem trực tiếp không cần plugin**: Người xem theo dõi video trực tiếp ngay trên trình duyệt hiện đại qua giao thức WHEP chuẩn hóa, không cần cài đặt phần mềm phụ trợ.
+- **Tự lưu trữ WebRTC đơn giản**: Cho phép cá nhân và tổ chức tự dựng máy chủ truyền phát video với độ trễ dưới 1 giây mà không phụ thuộc vào các dịch vụ đám mây bên thứ ba.
+- **Quản lý phòng phát sóng linh hoạt**: Cung cấp giao diện trực quan để khởi tạo phòng, cấu hình phát sóng công khai hoặc riêng tư, đặt lịch khả dụng và cấp quyền cho phần mềm truyền phát (OBS Studio, FFmpeg,...).
+- **Xem trực tiếp không cần plugin**: Trình phát video chuẩn hóa qua giao thức WHEP chạy trực tiếp trên các trình duyệt hiện đại qua thẻ HTML5 `<video>`, không đòi hỏi cài đặt tiện ích mở rộng.
 
 ---
 
-### 3. Tính năng chính
+### 3. Tính năng nổi bật
 
-- **Truyền phát độ trễ cực thấp (Sub-second Latency)**:
-  - **WHIP (WebRTC HTTP Ingestion Protocol)**: Đẩy luồng từ OBS Studio hoặc các encoder tương thích thông qua Bearer Token bảo mật (JWT).
-  - **WHEP (WebRTC HTTP Egress Protocol)**: Người xem theo dõi luồng phát trực tiếp qua phần tử HTML5 `<video>` với độ trễ tính bằng mili-giây.
-- **Quản lý phòng phát sóng & Lịch trình**:
-  - Đặt khung thời gian phát sóng (`valid_from` đến `valid_to`), tự động thông báo khi phòng đã hết hạn.
-  - Hỗ trợ khóa/mở luồng phát sóng theo thời gian thực (ngắt kết nối stream trực tiếp trên MediaMTX).
-- **Phân quyền & Tài khoản người dùng**:
-  - Hệ thống xác thực Rails 8 với xác nhận email kích hoạt tài khoản.
-  - Phân quyền bằng [Pundit](https://github.com/varvet/pundit): Trang chủ hiển thị công khai các kênh mới; chỉ chủ sở hữu kênh mới có quyền chỉnh sửa, xem thông số WHIP và quản lý luồng của mình.
-- **Giao diện & Trải nghiệm người dùng**:
-  - Thiết kế tối giản, hỗ trợ giao diện **Sáng (Light) / Tối (Dark)** với cơ chế lưu client-side và chống nháy sáng (anti-FOUC).
-  - Hỗ trợ song ngữ **Tiếng Việt** và **Tiếng Anh** (lưu lựa chọn vào session, hiển thị thời gian linh hoạt với `local-time`).
+- **Truyền phát video độ trễ cực thấp (WebRTC)**:
+  - **WHIP (WebRTC HTTP Ingestion Protocol)**: Đẩy luồng trực tiếp từ OBS Studio hoặc các encoder tương thích, xác thực bảo mật bằng Bearer JWT Token.
+  - **WHEP (WebRTC HTTP Egress Protocol)**: Trình phát trong trình duyệt xem luồng video thời gian thực với độ trễ tính bằng mili-giây.
+- **Quản lý phòng & Phân quyền bảo mật**:
+  - **Phòng công khai & Phòng riêng tư**: Dễ dàng chuyển đổi chế độ công khai hoặc riêng tư qua công tắc bật/tắt.
+  - **Mật khẩu phòng (Tùy chọn)**: Hỗ trợ cài đặt mật khẩu cho phòng riêng tư. Người xem (đã đăng nhập) cần nhập đúng mật khẩu để mở khóa và xem luồng phát.
+  - **Lịch trình phát sóng**: Hỗ trợ thiết lập thời gian bắt đầu (`valid_from`) và kết thúc (`valid_to`), tự động hiển thị thông báo trạng thái khi phòng chưa mở hoặc đã kết thúc.
+  - **Khóa luồng phát theo thời gian thực**: Chủ phòng có thể ngắt phiên phát sóng trực tiếp thông qua API của MediaMTX.
+  - **Phân quyền với [Pundit](https://github.com/varvet/pundit)**: Khách vãng lai và thành viên có thể khám phá các kênh công khai; chỉ người tạo phòng mới có quyền xem thông số kết nối WHIP, chỉnh sửa thông tin hoặc xóa kênh.
+- **Tài khoản & Xác thực chuẩn Rails 8**:
+  - Đăng ký tài khoản, gửi email xác nhận kích hoạt tài khoản và quy trình khôi phục mật khẩu.
+  - Bảo vệ webhook xác thực máy chủ qua token JWT ký thuật toán `HS512`.
+- **Trải nghiệm người dùng & Giao diện tối giản**:
+  - **Đa giao diện (Sáng / Tối)**: Chuyển đổi theme mượt mà, lưu vào `localStorage` và xử lý chống nháy sáng (anti-FOUC).
+  - **Đa ngôn ngữ (Tiếng Việt / English)**: Hỗ trợ song ngữ đầy đủ từ giao diện đến thông báo lỗi validation; lưu giữ bền vững xuyên suốt các lần mở trình duyệt qua Cookie dài hạn và Session.
+  - **Hiển thị thời gian bản địa**: Định dạng ngày giờ tự động thích ứng múi giờ người dùng qua thư viện `local-time`.
 
 ---
 
@@ -71,7 +82,7 @@ Dự án này ban đầu được phát triển với mục đích học tập, 
                            v                 v
                   +-----------------------------------+
                   |           Caddy Proxy             |
-                  |     (Reverse Proxy & SSL Auto)    |
+                  |     (Reverse Proxy & Auto-TLS)    |
                   +--------+-----------------+--------+
                            |                 |
                    /whip, /whep              | Web Traffic (Port 3000)
@@ -79,7 +90,7 @@ Dự án này ban đầu được phát triển với mục đích học tập, 
                            v                 v
             +----------------------+  +---------------------+
             |       MediaMTX       |  |     Rails 8 App     |
-            |   (WebRTC Server)    |  | (Auth, Rooms, Pundit|
+            |   (WebRTC Server)    |  |  (Solid Queue / DB) |
             +----------+-----------+  +----------+----------+
                        ^                         |
                        |--- JWT Webhook Callback |
@@ -87,65 +98,64 @@ Dự án này ban đầu được phát triển với mục đích học tập, 
 
 ---
 
-### 5. Yêu cầu hệ thống
+### 5. Yêu cầu môi trường
 
-Trước khi bắt đầu, hãy đảm bảo máy chủ hoặc máy tính của bạn đã cài đặt:
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/engine/install/) & [Docker Compose v2](https://docs.docker.com/compose/)
-- *(Tùy chọn cho môi trường dev cục bộ)*: Ruby 3.4.10, SQLite 3.x, Node.js (nếu cần tinh chỉnh asset)
+- *(Tùy chọn khi phát triển trực tiếp trên máy)*: Ruby 3.4.10, SQLite 3.x
 
 ---
 
 ### 6. Cài đặt và Khởi chạy
 
-#### Cách 1: Chạy bằng Docker Compose (Khuyên dùng)
+#### Cách 1: Sử dụng Docker Compose (Khuyên dùng)
 
-1. **Sao chép mã nguồn về máy**:
+1. **Tải mã nguồn về máy**:
    ```bash
-   git clone https://github.com/TheEEs/mtx.git
+   git clone https://github.com/theees/mtx.git
    cd mtx
    ```
 
-2. **Cấu hình biến môi trường**:
-   - Điều chỉnh cấu hình tên miền trong [`caddy/Caddyfile`](caddy/Caddyfile) phù hợp với domain hoặc IP của bạn.
-   - Kiểm tra các cổng cần thiết trong [`docker-compose.yml`](docker-compose.yml) (mặc định: `80`, `443`, `8890/udp`, `8189/udp`).
+2. **Cấu hình mạng và tên miền**:
+   - Kiểm tra và chỉnh sửa tên miền trong [`caddy/Caddyfile`](caddy/Caddyfile) phù hợp với môi trường của bạn (`localhost` hoặc domain thật).
+   - Kiểm tra các cổng kết nối trong [`docker-compose.yml`](docker-compose.yml) (mặc định: `80`, `443`, `8890/udp`, `8189/udp`).
 
-3. **Khởi động các dịch vụ**:
+3. **Khởi chạy hệ thống**:
    ```bash
    docker compose up -d --build
    ```
 
-4. **Truy cập ứng dụng**:
-   - Mở trình duyệt và truy cập: `http://localhost` (hoặc domain bạn đã cấu hình).
+4. **Trải nghiệm ứng dụng**:
+   - Mở trình duyệt và truy cập `http://localhost` (hoặc tên miền bạn đã cấu hình).
 
 ---
 
-#### Cách 2: Phát triển cục bộ (Local Development)
+#### Cách 2: Phát triển ứng dụng Rails cục bộ
 
-Nếu bạn muốn phát triển trực tiếp phần ứng dụng web Rails:
+Nếu bạn muốn tùy chỉnh hoặc phát triển thêm tính năng cho ứng dụng quản trị Rails:
 
 1. **Di chuyển vào thư mục `admin`**:
    ```bash
    cd admin
    ```
 
-2. **Cài đặt các thư viện (Gems)**:
+2. **Cài đặt các gói phụ thuộc (Gems)**:
    ```bash
    bundle install
    ```
 
-3. **Khởi tạo cơ sở dữ liệu**:
+3. **Khởi tạo cơ sở dữ liệu SQLite**:
    ```bash
    bin/rails db:prepare
    ```
 
-4. **Khởi động máy chủ phát triển Rails**:
+4. **Khởi chạy Rails Server**:
    ```bash
    bin/rails server
    ```
-   Ứng dụng sẽ khả dụng tại: `http://localhost:3000`.
+   Ứng dụng sẽ hoạt động tại `http://localhost:3000`.
 
-5. **Chạy kiểm thử (Test suite)**:
+5. **Chạy bộ kiểm thử (Test suite)**:
    ```bash
    bin/rails test
    ```
@@ -154,16 +164,16 @@ Nếu bạn muốn phát triển trực tiếp phần ứng dụng web Rails:
 
 ### 7. Hướng dẫn đóng góp (Contributing)
 
-Chúng tôi luôn hoan nghênh những đóng góp giúp dự án hoàn thiện hơn! Nếu bạn phát hiện lỗi hoặc muốn đề xuất cải tiến:
+Mọi đóng góp, báo cáo lỗi và đề xuất cải tiến đều rất đáng trân trọng! Bạn có thể tham gia đóng góp theo quy trình sau:
 
 1. **Fork** kho lưu trữ này về tài khoản GitHub của bạn.
-2. Tạo một nhánh mới mô tả tính năng hoặc bản sửa lỗi:
+2. Tạo nhánh mới mô tả nội dung bạn dự định thực hiện:
    ```bash
-   git checkout -b feature/ten-tinh-nang-moi
-   # hoặc: git checkout -b fix/mo-ta-loi
+   git checkout -b feature/ten-tinh-nang
+   # hoặc: git checkout -b fix/loi-can-sua
    ```
-3. Thực hiện thay đổi, tuân thủ phong cách lập trình của Rails và viết bổ sung test nếu cần thiết.
-4. Đảm bảo toàn bộ test hiện có đều vượt qua thành công:
+3. Viết code tuân thủ phong cách lập trình Rails và bổ sung các ca kiểm thử tương ứng.
+4. Kiểm tra để đảm bảo toàn bộ test case đều chạy thành công:
    ```bash
    bin/rails test
    ```
@@ -171,53 +181,54 @@ Chúng tôi luôn hoan nghênh những đóng góp giúp dự án hoàn thiện 
    ```bash
    git commit -m "feat: bổ sung tính năng X"
    ```
-6. Push lên nhánh của bạn:
+6. Đẩy nhánh lên remote repository:
    ```bash
-   git push origin feature/ten-tinh-nang-moi
+   git push origin feature/ten-tinh-nang
    ```
-7. Mở một **Pull Request (PR)** và mô tả ngắn gọn về những nội dung bạn đã thay đổi.
-
----
-
-### 8. Giấy phép (License)
-
-Dự án được phân phối dưới giấy phép [MIT License](https://opensource.org/licenses/MIT). Bạn hoàn toàn tự do sử dụng, chỉnh sửa và triển khai theo nhu cầu của mình.
+7. Mở một **Pull Request (PR)** trên GitHub để cùng thảo luận và rà soát mã nguồn.
 
 ---
 ---
 
-## English
+## 🇬🇧 English
 
 ### 1. Introduction
 
-**MTX** is a modest, lightweight open-source platform designed to provide a self-hosted live streaming solution with ultra-low latency. It integrates the [MediaMTX](https://github.com/bluenviron/mediamtx) media server for modern WebRTC streaming, [Caddy](https://caddyserver.com/) for automatic HTTPS and reverse proxying, and a straightforward channel management web application built on [Ruby on Rails 8](https://rubyonrails.org/).
+**MTX** is a lightweight, self-hosted WebRTC live streaming platform designed to provide ultra-low latency broadcasting. It combines:
+- **[MediaMTX](https://github.com/bluenviron/mediamtx)**: A high-performance media server supporting standardized WebRTC protocols (WHIP / WHEP).
+- **[Caddy](https://caddyserver.com/)**: An automated reverse proxy handling SSL/TLS certificates and routing video/web traffic.
+- **[Ruby on Rails 8](https://rubyonrails.org/)**: A web application managing broadcast rooms, user authorization, and streaming lifecycle.
 
-This project was built primarily for learning, testing low-latency in-browser video streaming technologies, and serving small-to-medium or internal streaming use cases. It does not aim to replace large-scale commercial platforms, but rather focuses on simplicity, ease of deployment, and straightforward maintenance.
+Built with a learning-oriented mindset, MTX is ideal for experiments, internal broadcasting, and small-to-medium streaming scenarios. The platform emphasizes simplicity, security, and straightforward maintenance.
 
 ---
 
 ### 2. Project Purpose
 
-- **Simplify Self-Hosted WebRTC**: Make it easy for individuals and small teams to deploy a sub-second latency streaming server without relying on third-party cloud infrastructure.
-- **Straightforward Channel Management**: Provide a clean web dashboard to create broadcast rooms, set active schedules, manage security access, and obtain encoder connection credentials (for OBS Studio, FFmpeg, etc.).
-- **Plugin-Free Playback**: Allow viewers to watch live streams directly in modern browsers via standardized WHEP without requiring third-party player plugins or heavy extensions.
+- **Simplify Self-Hosted WebRTC**: Enable individuals and organizations to operate their own sub-second latency streaming infrastructure without third-party cloud lock-in.
+- **Flexible Broadcast Management**: Offer an intuitive dashboard to create channels, toggle public or private visibility, set schedules, and retrieve encoder configuration (for OBS Studio, FFmpeg, etc.).
+- **Plugin-Free In-Browser Viewing**: Deliver live video through standardized WHEP natively rendered inside HTML5 `<video>` elements without requiring third-party plugins.
 
 ---
 
 ### 3. Key Features
 
-- **Sub-Second Low Latency Streaming**:
-  - **WHIP (WebRTC HTTP Ingestion Protocol)**: Publish video streams from OBS Studio or compatible encoders using authenticated Bearer Tokens (JWT).
-  - **WHEP (WebRTC HTTP Egress Protocol)**: Stream playback directly through HTML5 `<video>` tags with millisecond-level latency.
-- **Channel & Schedule Management**:
-  - Set active broadcasting windows (`valid_from` to `valid_to`) with automatic expiration warnings.
-  - Real-time stream blocking/unblocking (disconnect active streams directly via MediaMTX session API).
-- **User Authentication & Authorization**:
-  - Built on Rails 8 authentication with email confirmation and password reset flows.
-  - Authorized with [Pundit](https://github.com/varvet/pundit): public exploration on the homepage, strict creator-only permissions for channel editing, WHIP credential retrieval, and stream management.
-- **Clean User Experience**:
-  - Minimalist UI with **Light / Dark** theme switching, persisted via `localStorage` with zero flash of unstyled content (anti-FOUC).
-  - Bilingual support (**Vietnamese** and **English**) persisted across sessions with localized timestamps via `local-time`.
+- **Sub-Second Low-Latency Streaming (WebRTC)**:
+  - **WHIP (WebRTC HTTP Ingestion Protocol)**: Ingest live streams directly from OBS Studio or compatible encoders secured with JWT Bearer Tokens.
+  - **WHEP (WebRTC HTTP Egress Protocol)**: Real-time playback inside the browser with millisecond-grade latency.
+- **Room Management & Access Control**:
+  - **Public & Private Rooms**: Easily switch visibility using an interactive toggle.
+  - **Room Password (Optional)**: Set an optional password for private rooms. Viewers (signed-in accounts) must enter the correct password to unlock and watch the stream.
+  - **Broadcast Scheduling**: Set active start (`valid_from`) and end (`valid_to`) times with helpful notices when a room is not yet started or has expired.
+  - **Real-Time Stream Termination**: Channel owners can terminate/kick out active WebRTC publisher sessions via MediaMTX APIs.
+  - **Role-Based Authorization ([Pundit](https://github.com/varvet/pundit))**: Public channels are discoverable by everyone; only room owners can view WHIP parameters, edit settings, or delete channels.
+- **Rails 8 Authentication & Security**:
+  - User registration, email confirmation, and password reset flows.
+  - MediaMTX daemon webhook authentication protected by `HS512` signed JWT tokens.
+- **Minimalist & Accessible UI**:
+  - **Light / Dark Theme**: Smooth theme switching persisted in `localStorage` with anti-FOUC script.
+  - **Bilingual Support (Vietnamese & English)**: Complete internationalization persisted across browser sessions via persistent cookies and sessions.
+  - **Localized Timestamps**: Relative and localized date/time formatting via `local-time`.
 
 ---
 
@@ -241,7 +252,7 @@ This project was built primarily for learning, testing low-latency in-browser vi
                            v                 v
             +----------------------+  +---------------------+
             |       MediaMTX       |  |     Rails 8 App     |
-            |   (WebRTC Server)    |  | (Auth, Rooms, Pundit|
+            |   (WebRTC Server)    |  |  (Solid Queue / DB) |
             +----------+-----------+  +----------+----------+
                        ^                         |
                        |--- JWT Webhook Callback |
@@ -251,25 +262,24 @@ This project was built primarily for learning, testing low-latency in-browser vi
 
 ### 5. Prerequisites
 
-Before getting started, make sure you have installed:
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/engine/install/) & [Docker Compose v2](https://docs.docker.com/compose/)
-- *(Optional for standalone local development)*: Ruby 3.4.10, SQLite 3.x
+- *(Optional for local Rails development)*: Ruby 3.4.10, SQLite 3.x
 
 ---
 
 ### 6. Installation & Quick Start
 
-#### Method 1: Run with Docker Compose (Recommended)
+#### Method 1: Using Docker Compose (Recommended)
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/TheEEs/mtx.git
+   git clone https://github.com/theees/mtx.git
    cd mtx
    ```
 
 2. **Configure your domain**:
-   - Check and adjust domain configurations in [`caddy/Caddyfile`](caddy/Caddyfile) to match your domain or IP address.
+   - Inspect and update [`caddy/Caddyfile`](caddy/Caddyfile) to match your environment (`localhost` or production domain).
    - Verify network ports in [`docker-compose.yml`](docker-compose.yml) (default: `80`, `443`, `8890/udp`, `8189/udp`).
 
 3. **Start the services**:
@@ -277,14 +287,14 @@ Before getting started, make sure you have installed:
    docker compose up -d --build
    ```
 
-4. **Access the web app**:
+4. **Access the application**:
    - Open your browser at `http://localhost` (or your configured domain).
 
 ---
 
 #### Method 2: Local Rails Development
 
-If you want to work directly on the Rails application:
+If you wish to develop or modify the Rails dashboard directly:
 
 1. **Navigate to the `admin` directory**:
    ```bash
@@ -296,16 +306,16 @@ If you want to work directly on the Rails application:
    bundle install
    ```
 
-3. **Prepare the database**:
+3. **Prepare the SQLite database**:
    ```bash
    bin/rails db:prepare
    ```
 
-4. **Start the Rails development server**:
+4. **Start the development server**:
    ```bash
    bin/rails server
    ```
-   The application will be running at `http://localhost:3000`.
+   The application will be accessible at `http://localhost:3000`.
 
 5. **Run the test suite**:
    ```bash
@@ -316,31 +326,32 @@ If you want to work directly on the Rails application:
 
 ### 7. Contributing
 
-Contributions, bug reports, and suggestions are always welcome! If you would like to help improve the project:
+Contributions, bug reports, and suggestions are warmly appreciated! To contribute:
 
 1. **Fork** this repository to your GitHub account.
-2. Create a new branch describing your feature or bug fix:
+2. Create a new branch for your feature or bug fix:
    ```bash
    git checkout -b feature/your-feature-name
    # or: git checkout -b fix/issue-description
    ```
-3. Make your changes adhering to Rails conventions, and add test cases where applicable.
-4. Ensure all existing tests pass:
+3. Implement your changes following Rails best practices and write appropriate tests.
+4. Ensure all tests pass:
    ```bash
    bin/rails test
    ```
-5. Commit your work with a clear, concise commit message:
+5. Commit your work with clear, concise messages:
    ```bash
-   git commit -m "feat: add feature description"
+   git commit -m "feat: add feature X"
    ```
 6. Push to your branch:
    ```bash
    git push origin feature/your-feature-name
    ```
-7. Open a **Pull Request (PR)** describing your changes.
+7. Open a **Pull Request (PR)** on GitHub for review and discussion.
 
 ---
 
-### 8. License
+### Giấy phép / License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). You are free to use, modify, and distribute it according to your needs.
+Dự án được phân phối dưới giấy phép **[MIT License](https://opensource.org/licenses/MIT)**.  
+This project is open-source software licensed under the **[MIT License](https://opensource.org/licenses/MIT)**.
