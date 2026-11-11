@@ -1,4 +1,6 @@
 class Room < ApplicationRecord
+    has_secure_password validations: false
+
     belongs_to :user, optional: true
     include Hashid::Rails
     validates :name, :description, :owner, :valid_to, :valid_from, presence: true
@@ -6,8 +8,14 @@ class Room < ApplicationRecord
     validate :valid_from_must_be_less_than_valid_to
     validates :stream_id, uniqueness: true, unless: -> { stream_id.blank? }
 
+    before_validation :clear_password_if_public
+
     scope :public_rooms, -> { where(is_public: true) }
     scope :private_rooms, -> { where(is_public: false) }
+
+    def password_protected?
+      !is_public? && password_digest.present?
+    end
 
     def expired?
         valid_to.present? && Time.current > valid_to
@@ -40,6 +48,10 @@ class Room < ApplicationRecord
     end
 
     private
+    def clear_password_if_public
+      self.password_digest = nil if is_public?
+    end
+
     def valid_from_must_be_less_than_valid_to
         if (valid_to && valid_from) and valid_from >= valid_to
             formatted_time = I18n.l(valid_to, format: :long)

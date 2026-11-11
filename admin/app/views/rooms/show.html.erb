@@ -1,6 +1,6 @@
 <% content_for(:title, @room.name) %>
 
-<div <%= %(data-video-token-value="#{h(@room.jwt)}" data-video-url-value="#{h(@whepURL)}" data-video-room-id-value="#{h(@room.hashid)}" data-video-live-text-value="#{t('room_show.status_live')}" data-video-idle-text-value="#{t('room_show.status_idle')}" data-controller="video").html_safe if @room.available? %>
+<div <%= %(data-video-token-value="#{h(@room.jwt)}" data-video-url-value="#{h(@whepURL)}" data-video-room-id-value="#{h(@room.hashid)}" data-video-live-text-value="#{t('room_show.status_live')}" data-video-idle-text-value="#{t('room_show.status_idle')}" data-controller="video#{' screen-share' if policy(@room).toggle_stream?}" #{%(data-screen-share-token-value="#{h(@room.jwt)}" data-screen-share-url-value="#{h(@whepURL)}" data-screen-share-room-id-value="#{h(@room.hashid)}" data-screen-share-connected-text-value="#{t('screen_share.connected')}" data-screen-share-connecting-text-value="#{t('screen_share.connecting')}") if policy(@room).toggle_stream?}).html_safe if @room.available? %>
      class="space-y-6 max-w-4xl mx-auto"
 >
   <% if notice.present? %>
@@ -9,6 +9,35 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
       </svg>
       <span><%= notice %></span>
+    </div>
+  <% end %>
+
+  <% if policy(@room).toggle_stream? && @room.available? %>
+    <!-- Screen Share Active Streaming Banner -->
+    <div data-screen-share-target="activeBanner" class="hidden rounded-xl border border-error/40 bg-error/10 p-4 text-xs">
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <div class="flex items-center gap-2.5">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-error"></span>
+          </span>
+          <span class="font-semibold text-error"><%= t("screen_share.streaming_now") %></span>
+          <span class="text-base-content/40">•</span>
+          <span data-screen-share-target="duration" class="font-mono font-medium text-base-content">00:00</span>
+          <span class="text-base-content/40">•</span>
+          <span data-screen-share-target="status" class="text-base-content/70"><%= t("screen_share.connected") %></span>
+        </div>
+
+        <button type="button"
+                data-action="click->screen-share#stop"
+                class="btn btn-xs btn-error text-white gap-1 rounded cursor-pointer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          <%= t("screen_share.stop") %>
+        </button>
+      </div>
     </div>
   <% end %>
 
@@ -134,6 +163,19 @@
         </button>
 
         <% if policy(@room).toggle_stream? && @room.available? %>
+          <!-- Screen Share Button -->
+          <button type="button"
+                  data-action="click->screen-share#open"
+                  class="btn btn-sm btn-primary rounded-md gap-1.5 text-xs font-medium cursor-pointer"
+                  id="screen_share_btn"
+                  title="<%= t("screen_share.button") %>"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span><%= t("screen_share.button") %></span>
+          </button>
+
           <%= button_to toggle_stream_path(@room), method: :delete, class: "btn btn-sm btn-ghost border border-base-content/20 rounded-md gap-1.5 text-xs font-medium cursor-pointer", id: "toggle_stream_#{@room.hashid}_1" do %>
             <% if @room.blocked %>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -187,6 +229,30 @@
         </div>
 
         <div class="space-y-3 text-xs">
+          <!-- Screen Sharing Quick Action Card -->
+          <div class="p-3.5 rounded-lg border border-primary/20 bg-primary/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h3 class="text-xs font-semibold text-base-content flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <%= t("screen_share.box_title") %>
+              </h3>
+              <p class="text-[11px] text-base-content/60 mt-0.5">
+                <%= t("screen_share.box_desc") %>
+              </p>
+            </div>
+            <button type="button"
+                    data-action="click->screen-share#open"
+                    class="btn btn-sm btn-primary rounded-md text-xs font-medium cursor-pointer shrink-0 inline-flex items-center gap-1.5"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span><%= t("screen_share.button") %></span>
+            </button>
+          </div>
+
           <!-- WHIP URL -->
           <div>
             <label class="block font-medium text-base-content/70 mb-1"><%= t("room_show.whip_url") %></label>
@@ -222,5 +288,108 @@
   <% else %>
     <!-- Dummy hidden span for Turbo Stream target -->
     <span class="hidden" data-video-target="whipUrl"></span>
+  <% end %>
+
+  <% if policy(@room).toggle_stream? && @room.available? %>
+    <!-- Screen Share Modal (Configuration & Browser Support Error Handling) -->
+    <dialog data-screen-share-target="modal" class="modal">
+      <div class="modal-box max-w-md bg-base-100 border border-base-200">
+        <!-- View 1: Browser Not Supported Error View -->
+        <div data-screen-share-target="unsupportedView" class="hidden space-y-4">
+          <div class="flex items-center gap-3 text-error">
+            <div class="p-2 rounded-full bg-error/10">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-base"><%= t("screen_share.unsupported_title") %></h3>
+              <p class="text-[11px] text-base-content/50 font-mono">navigator.mediaDevices.getDisplayMedia</p>
+            </div>
+          </div>
+
+          <p class="text-xs text-base-content/70 leading-relaxed">
+            <%= t("screen_share.unsupported_desc") %>
+          </p>
+
+          <div class="modal-action">
+            <button type="button" class="btn btn-sm btn-ghost cursor-pointer" data-action="click->screen-share#closeModal">
+              <%= t("actions.close") %>
+            </button>
+          </div>
+        </div>
+
+        <!-- View 2: Supported Configuration View -->
+        <div data-screen-share-target="configView" class="space-y-4">
+          <div class="border-b border-base-200/60 pb-3">
+            <h3 class="font-bold text-base text-base-content flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <%= t("screen_share.config_title") %>
+            </h3>
+            <p class="text-xs text-base-content/60 mt-1">
+              <%= t("screen_share.config_desc") %>
+            </p>
+          </div>
+
+          <div class="space-y-3.5 text-xs">
+            <!-- Video Codec Dropdown -->
+            <div>
+              <label class="block font-medium text-base-content/80 mb-1">
+                <%= t("screen_share.video_codec") %>
+              </label>
+              <select data-screen-share-target="videoCodecSelect" class="select select-sm select-bordered w-full text-xs font-mono">
+              </select>
+              <span class="text-[10px] text-base-content/50 mt-1 block">
+                <%= t("screen_share.video_codec_hint") %>
+              </span>
+            </div>
+
+            <!-- Audio Codec Dropdown -->
+            <div>
+              <label class="block font-medium text-base-content/80 mb-1">
+                <%= t("screen_share.audio_codec") %>
+              </label>
+              <select data-screen-share-target="audioCodecSelect" class="select select-sm select-bordered w-full text-xs font-mono">
+              </select>
+              <span class="text-[10px] text-base-content/50 mt-1 block">
+                <%= t("screen_share.audio_codec_hint") %>
+              </span>
+            </div>
+
+            <!-- Include Audio Toggle -->
+            <label class="flex items-center gap-2 cursor-pointer pt-1">
+              <input type="checkbox" data-screen-share-target="includeAudioCheckbox" checked class="checkbox checkbox-xs checkbox-primary" />
+              <span class="text-xs text-base-content/80"><%= t("screen_share.include_audio") %></span>
+            </label>
+
+            <!-- Error message container -->
+            <div data-screen-share-target="errorAlert" class="hidden p-2.5 rounded-lg border border-error/30 bg-error/10 text-error text-xs">
+              <span data-screen-share-target="errorMessage"></span>
+            </div>
+          </div>
+
+          <div class="modal-action">
+            <button type="button" class="btn btn-sm btn-ghost cursor-pointer" data-action="click->screen-share#closeModal">
+              <%= t("actions.cancel") %>
+            </button>
+            <button type="button"
+                    data-screen-share-target="startShareButton"
+                    data-action="click->screen-share#startSharing"
+                    class="btn btn-sm btn-primary gap-1.5 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              </svg>
+              <%= t("screen_share.start_button") %>
+            </button>
+          </div>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button type="button" data-action="click->screen-share#closeModal">close</button>
+      </form>
+    </dialog>
   <% end %>
 </div>

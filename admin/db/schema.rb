@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_09_172410) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_10_154500) do
   create_table "rooms", force: :cascade do |t|
     t.boolean "blocked", default: false
     t.datetime "created_at", null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_172410) do
     t.datetime "valid_to"
     t.integer "user_id"
     t.boolean "is_public", default: true, null: false
+    t.string "password_digest"
     t.index ["name"], name: "index_rooms_on_name"
     t.index ["stream_id"], name: "index_rooms_on_stream_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"

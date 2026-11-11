@@ -26,3 +26,13 @@ private_room:
   valid_to: 2030-04-14 18:00:00
   user: two
   is_public: false
+  password_digest: <%= BCrypt::Password.create("secret123") %>
+
+private_room_no_password:
+  name: Room Private No Password
+  owner: two@example.com
+  description: Private room without password text
+  valid_from: 2026-04-14 14:00:00
+  valid_to: 2030-04-14 18:00:00
+  user: two
+  is_public: false

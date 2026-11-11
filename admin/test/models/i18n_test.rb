@@ -16,6 +16,8 @@ class I18nTest < ActiveSupport::TestCase
       assert_equal "Thời điểm kết thúc", Room.human_attribute_name(:valid_to)
       assert_equal "Múi giờ", Room.human_attribute_name(:timezone)
       assert_equal "Mã luồng phát sóng", Room.human_attribute_name(:stream_id)
+      assert_equal "Chế độ công khai", Room.human_attribute_name(:is_public)
+      assert_equal "Mật khẩu phòng", Room.human_attribute_name(:password)
       assert_equal "Trạng thái khóa", Room.human_attribute_name(:blocked)
       assert_equal "Người tạo", Room.human_attribute_name(:user_id)
 

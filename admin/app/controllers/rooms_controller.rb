@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   allow_unauthenticated_access only: [ :auth, :show ]
   skip_before_action :verify_authenticity_token, only: [ :auth ]
-  before_action :set_room, only: %i[ show edit update destroy toggle_stream ]
+  before_action :set_room, only: %i[ show edit update destroy toggle_stream unlock ]
   around_action :set_timezone, only: %i[ auth update create edit ]
   # GET /rooms or /rooms.json
   def index
@@ -11,7 +11,26 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1 or /rooms/1.json
   def show
+    unless room_unlocked?(@room)
+      render :unlock and return
+    end
     @whepURL = request.base_url
+  end
+
+  # POST /rooms/1/unlock
+  def unlock
+    if @room.is_public? || room_unlocked?(@room)
+      redirect_to @room and return
+    end
+
+    if @room.authenticate(params[:password])
+      session[:unlocked_room_ids] ||= []
+      session[:unlocked_room_ids] << @room.id unless session[:unlocked_room_ids].include?(@room.id)
+      redirect_to @room, notice: t("rooms.unlock_success")
+    else
+      flash.now[:alert] = t("rooms.invalid_password")
+      render :unlock, status: :unprocessable_entity
+    end
   end
 
   # GET /rooms/new
@@ -108,12 +127,27 @@ class RoomsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params.expect(:id))
+      if action_name == "show" && !@room.is_public? && !authenticated?
+        flash[:alert] = t("pundit.unauthenticated", default: "Vui lòng đăng nhập để truy cập.")
+        request_authentication
+        return
+      end
       authorize @room
     end
 
+    def room_unlocked?(room)
+      return true if room.is_public?
+      return true if current_user.present? && room.user_id.present? && room.user_id == current_user.id
+      return true if room.password_digest.blank?
+      session[:unlocked_room_ids]&.include?(room.id)
+    end
+    helper_method :room_unlocked?
+
     # Only allow a list of trusted parameters through.
     def room_params
-      params.expect(room: [ :name, :owner, :description, :valid_from, :valid_to, :timezone, :is_public ])
+      p = params.expect(room: [ :name, :owner, :description, :valid_from, :valid_to, :timezone, :is_public, :password ])
+      p.delete(:password) if p[:password].blank?
+      p
     end
 
     def set_timezone

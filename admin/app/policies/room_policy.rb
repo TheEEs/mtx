@@ -6,7 +6,7 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def show?
-    record.is_public? || user.present?
+    true
   end
 
   def create?
@@ -31,6 +31,10 @@ class RoomPolicy < ApplicationPolicy
 
   def toggle_stream?
     owner?
+  end
+
+  def unlock?
+    user.present?
   end
 
   def owner?
