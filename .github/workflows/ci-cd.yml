@@ -127,17 +127,17 @@ jobs:
         run: echo "NAME=${GITHUB_REPOSITORY,,}" >> $GITHUB_OUTPUT
 
       # 1. Rails Admin App
-      - name: Build and push Rails image
-        uses: docker/build-push-action@v6
-        with:
-          context: ./admin
-          file: ./admin/Dockerfile
-          push: true
-          tags: |
-            ghcr.io/${{ steps.repo.outputs.NAME }}/admin:${{ github.sha }}
-            ghcr.io/${{ steps.repo.outputs.NAME }}/admin:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      #- name: Build and push Rails image
+      #  uses: docker/build-push-action@v6
+      #  with:
+      #    context: ./admin
+      #    file: ./admin/Dockerfile
+      #    push: true
+      #    tags: |
+      #      ghcr.io/${{ steps.repo.outputs.NAME }}/admin:${{ github.sha }}
+      #      ghcr.io/${{ steps.repo.outputs.NAME }}/admin:latest
+      #    cache-from: type=gha
+      #    cache-to: type=gha,mode=max
 
       # 2. Caddy Reverse Proxy
       - name: Build and push Caddy image
