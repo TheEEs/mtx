@@ -206,8 +206,7 @@ jobs:
         run: |
 
           # Boot accessory containers (MediaMTX & Caddy) if not running, or reboot them
-          #bin/kamal accessory reboot all || bin/kamal accessory boot all
+          bin/kamal accessory reboot all || bin/kamal accessory boot all
 
           # Deploy Rails application with zero downtime
-          #bin/kamal deploy --version=${{ github.sha }}
-          bin/kamal setup --version=${{ github.sha }}
+          bin/kamal deploy --version=${{ github.sha }}
