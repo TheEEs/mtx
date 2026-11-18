@@ -10,7 +10,10 @@ servers:
     hosts:
       - <%= ENV.fetch("SERVER_IP", "127.0.0.1") %>
     # Caddy handles front-facing reverse proxy and SSL, so disable built-in kamal-proxy
-    proxy: false
+    proxy: 
+      ssl: false
+      host: admin-web-<%= ENV.fetch("GITHUB_SHA", "latest") %>
+      app_port: 80
 
 # Where you keep your container images.
 registry:

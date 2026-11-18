@@ -192,7 +192,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Run Kamal Setup
+      - name: Run Kamal Deploy
         env:
           SERVER_IP: ${{ secrets.SERVER_IP }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
