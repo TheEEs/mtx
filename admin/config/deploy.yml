@@ -14,6 +14,8 @@ servers:
       ssl: false
       host: admin-web-<%= ENV.fetch("GITHUB_SHA", "latest") %>
       app_port: 80
+      run: 
+        publish: false
 
 # Where you keep your container images.
 registry:
