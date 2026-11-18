@@ -87,6 +87,7 @@ accessories:
     env:
       secret:
         - LINODE_APIKEY
+        - CLOUDFLARE_API_KEY
       clear:
         APP_HOST: admin-web-<%= ENV.fetch("GITHUB_SHA", "latest") %>
         MEDIAMTX_HOST: admin-mediamtx

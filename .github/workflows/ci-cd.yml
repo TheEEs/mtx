@@ -197,6 +197,7 @@ jobs:
           SERVER_IP: ${{ secrets.SERVER_IP }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           LINODE_APIKEY: ${{ secrets.LINODE_APIKEY }}
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
