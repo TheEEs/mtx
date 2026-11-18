@@ -119,9 +119,9 @@ authHTTPFingerprint:
 # Format is the same as the one of user permissions.
 authHTTPExclude:
 - action: api
-- action: read
 - action: metrics
 - action: pprof
+#- action: read
 
 # JWT-based authentication.
 # Users have to login through an external identity server and obtain a JWT.
