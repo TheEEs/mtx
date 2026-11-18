@@ -12,7 +12,7 @@ servers:
     # Caddy handles front-facing reverse proxy and SSL, so disable built-in kamal-proxy
     proxy: 
       ssl: false
-      host: admin-web-<%= ENV.fetch("GITHUB_SHA", "latest") %>
+      host: <%= ENV.fetch("SERVER_IP", "mtx.trandat.icu") %>
       app_port: 80
       run: 
         publish: false
