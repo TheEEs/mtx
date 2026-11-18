@@ -1,9 +1,17 @@
-{
-	acme_dns linode {$LINODE_APIKEY:"invalid_key"}
-	acme_dns cloudflare {$CLOUDFLARE_API_KEY:"invalid_key"}
+(dns-challenge-production) {
+	acme_dns linode {$LINODE_APIKEY:invalid_key}
+	acme_dns cloudflare {$CLOUDFLARE_API_KEY:invalid_key}
 }
-mtx.trandat.icu, http://mtx.localhost {
+(dns-challenge-development) {
+
+}
+
+{
+	import dns-challenge-{$APP_ENVIRONMENT:development}
+}
+
+{$SERVER_DOMAIN:http://mtx.localhost} {
 	@whiep path */whip */whip/* */whep */whep/*
 	reverse_proxy @whiep {$MEDIAMTX_HOST:mediamtx}:8889
-	reverse_proxy kamal-proxy
+	reverse_proxy {$APP_HOST:app:3000}
 }
