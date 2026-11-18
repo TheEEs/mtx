@@ -192,7 +192,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Run Kamal Deploy
+      - name: Run Kamal Setup
         env:
           SERVER_IP: ${{ secrets.SERVER_IP }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
@@ -206,7 +206,8 @@ jobs:
         run: |
 
           # Boot accessory containers (MediaMTX & Caddy) if not running, or reboot them
-          bin/kamal accessory reboot all || bin/kamal accessory boot all
+          #bin/kamal accessory reboot all || bin/kamal accessory boot all
 
           # Deploy Rails application with zero downtime
-          bin/kamal deploy --version=${{ github.sha }}
+          #bin/kamal deploy --version=${{ github.sha }}
+          bin/kamal setup --version=${{ github.sha }}
