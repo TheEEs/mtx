@@ -3,6 +3,7 @@ class RoomsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [ :auth ]
   before_action :set_room, only: %i[ show edit update destroy toggle_stream unlock ]
   around_action :set_timezone, only: %i[ auth update create edit ]
+  
   # GET /rooms or /rooms.json
   def index
     @rooms = policy_scope(Room).order(created_at: :desc)
