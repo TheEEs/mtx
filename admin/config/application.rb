@@ -22,6 +22,7 @@ module Admin
     # in config/environments, which are processed later.
     #
     # Allow requests from local, docker container, and domain hosts
+    config.hosts.clear
     config.hosts << "app"
     config.hosts << "app:3000"
     config.hosts << "localhost"
@@ -30,7 +31,7 @@ module Admin
     config.hosts << "example.com"
     config.hosts << /.*\.localhost/
     config.hosts << /.*\.trandat\.icu/
-    config.hosts << /admin-web-.*/
+    config.hosts << "kamal-proxy"
 
     # Skip HostAuthorization for internal endpoints (health check and MediaMTX WebRTC auth webhook)
     config.host_authorization = {
