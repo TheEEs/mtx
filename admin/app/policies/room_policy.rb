@@ -44,12 +44,7 @@ class RoomPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     def resolve
       if user.present?
-        fav_ids = user.favorite_room_ids
-        if fav_ids.any?
-          scope.where("rooms.user_id = :user_id OR rooms.id IN (:fav_ids)", user_id: user.id, fav_ids: fav_ids).distinct
-        else
-          scope.where(user_id: user.id)
-        end
+        scope.includes(:favorited_by_users).where(users: { id: user.id }).or(Room.where(user_id: user.id)).order(favorites: { user_id: :desc }, created_at: :desc)
       else
         scope.none
       end
