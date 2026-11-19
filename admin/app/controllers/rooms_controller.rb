@@ -6,14 +6,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms or /rooms.json
   def index
-    fav_ids = current_user&.favorite_room_ids || []
-    base_scope = policy_scope(Room)
-    if fav_ids.any?
-      sanitized_ids = fav_ids.map(&:to_i).join(",")
-      @rooms = base_scope.order(Arel.sql("CASE WHEN rooms.id IN (#{sanitized_ids}) THEN 0 ELSE 1 END"), created_at: :desc)
-    else
-      @rooms = base_scope.order(created_at: :desc)
-    end
+    @rooms = policy_scope(Room)
     authorize Room
   end
 
