@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "home/index"
   resources :rooms do
     post :unlock, on: :member
+    resource :favorite, only: %i[create destroy]
   end
   post "rooms/auth", to: "rooms#auth"
   delete "rooms/:id/stream", to: "rooms#toggle_stream", as: :toggle_stream

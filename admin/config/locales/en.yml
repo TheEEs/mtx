@@ -192,6 +192,15 @@ en:
     unsupported_title: "Browser Not Supported"
     unsupported_desc: "Your browser does not currently support live screen sharing (getDisplayMedia). Please use a desktop browser such as Google Chrome, Microsoft Edge, Mozilla Firefox, or Apple Safari (macOS) in a secure context (HTTPS)."
 
+  favorites:
+    add: "Favorite"
+    remove: "Unfavorite"
+    favorited: "Favorited"
+    badge: "Pinned"
+    added: "Room added to your favorites"
+    removed: "Room removed from your favorites"
+    login_required: "Please sign in to add to favorites"
+
   rooms:
     private_room: "Private Room"
     private_badge: "Private"

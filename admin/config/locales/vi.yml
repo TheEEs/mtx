@@ -356,6 +356,15 @@ vi:
     unsupported_title: "Trình duyệt không hỗ trợ"
     unsupported_desc: "Trình duyệt của bạn hiện không hỗ trợ tính năng chia sẻ màn hình trực tiếp (getDisplayMedia). Vui lòng sử dụng trình duyệt trên máy tính như Google Chrome, Microsoft Edge, Mozilla Firefox hoặc Apple Safari (macOS) trên môi trường bảo mật (HTTPS)."
 
+  favorites:
+    add: "Yêu thích"
+    remove: "Bỏ yêu thích"
+    favorited: "Đã yêu thích"
+    badge: "Đã ghim"
+    added: "Đã thêm phòng vào danh sách yêu thích"
+    removed: "Đã xóa phòng khỏi danh sách yêu thích"
+    login_required: "Vui lòng đăng nhập để thêm vào yêu thích"
+
   rooms:
     private_room: "Phòng riêng tư"
     private_badge: "Riêng tư"

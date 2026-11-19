@@ -147,6 +147,9 @@
 
       <!-- Action Buttons -->
       <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-start sm:justify-end">
+        <!-- Favorite / Pin Button -->
+        <%= render "rooms/favorite_button", room: @room %>
+
         <!-- Web Share API Button -->
         <button type="button"
                 data-controller="share"

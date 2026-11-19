@@ -61,6 +61,14 @@
                   <%= room.owner.presence || "MTX Streamer" %>
                 </span>
                 <div class="flex items-center gap-1.5 shrink-0">
+                  <% if authenticated? && current_user.favorited?(room) %>
+                    <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-medium bg-amber-500/10 text-amber-500" title="<%= t('favorites.favorited') %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 fill-current text-amber-500" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                      </svg>
+                      <%= t("favorites.badge") %>
+                    </span>
+                  <% end %>
                   <% unless room.is_public? %>
                     <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-medium bg-amber-500/10 text-amber-500">
                       <% if room.password_protected? %>

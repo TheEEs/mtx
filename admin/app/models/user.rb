@@ -5,6 +5,12 @@ class User < ApplicationRecord
   has_secure_password reset_token: { expires_in: PASSWORD_RESET_TOKEN_EXPIRATION }
   has_many :sessions, dependent: :destroy
   has_many :rooms, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_rooms, through: :favorites, source: :room
+
+  def favorited?(room)
+    favorites.exists?(room_id: room.id)
+  end
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 

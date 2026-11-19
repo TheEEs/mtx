@@ -2,6 +2,8 @@ class Room < ApplicationRecord
     has_secure_password validations: false
 
     belongs_to :user, optional: true
+    has_many :favorites, dependent: :destroy
+    has_many :favorited_by_users, through: :favorites, source: :user
     include Hashid::Rails
     validates :name, :description, :owner, :valid_to, :valid_from, presence: true
     validates :name, uniqueness: true

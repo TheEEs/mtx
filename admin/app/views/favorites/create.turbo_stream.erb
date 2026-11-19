@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "favorite_room_#{@room.hashid}" do %>
+  <%= render "rooms/favorite_button", room: @room %>
+<% end %>
