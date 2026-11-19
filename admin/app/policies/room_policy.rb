@@ -44,7 +44,7 @@ class RoomPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     def resolve
       if user.present?
-        scope.includes(:favorited_by_users).where(users: {id: user.id}).or(Room.where(user_id: user.id)).order(favorites: {user_id: :desc}, created_at: :desc)
+        scope.includes(:favorited_by_users).where(users: { id: user.id }).or(Room.where(user_id: user.id)).order(favorites: { user_id: :desc }, created_at: :desc)
       else
         scope.none
       end
