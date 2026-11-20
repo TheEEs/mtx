@@ -3,9 +3,9 @@ class HomeController < ApplicationController
 
   def index
     if authenticated?
-      @rooms = policy_scope(Room, policy_scope_class: RoomPolicy::Scope)
+      @rooms = policy_scope(Room, policy_scope_class: RoomPolicy::Scope).limit(6)
     else
-      @rooms = Room.public_rooms.order(created_at: :desc).limit(6)
+      @rooms = []
     end
   end
 end
